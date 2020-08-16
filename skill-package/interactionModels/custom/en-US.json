@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "change me",
+      "invocationName": "focus timer",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -16,25 +16,37 @@
           "samples": []
         },
         {
-          "name": "HelloWorldIntent",
+          "name": "AMAZON.NavigateHomeIntent",
+          "samples": []
+        },
+        {
+          "name": "StartSessionIntent",
           "slots": [],
           "samples": [
-            "hello",
-            "how are you",
-            "say hi world",
-            "say hi",
-            "hi",
-            "say hello world",
-            "say hello"
+            "start",
+            "start focus session",
+            "start session"
           ]
         },
         {
-          "name": "AMAZON.NavigateHomeIntent",
-          "samples": []
+          "name": "StopSessionIntent",
+          "slots": [],
+          "samples": [
+            "stop focus",
+            "stop focus session"
+          ]
+        },
+        {
+          "name": "PauseSessionIntent",
+          "slots": [],
+          "samples": [
+            "pause focus session",
+            "pause session",
+            "pause"
+          ]
         }
       ],
       "types": []
     }
-  },
-  "version": "1"
+  }
 }
