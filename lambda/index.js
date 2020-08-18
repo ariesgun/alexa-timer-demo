@@ -21,7 +21,13 @@ const StartSessionIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'StartSessionIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'Hello World! Start';
+
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        sessionAttributes.startedText = "Wow, it is started";
+
+        handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+
+        const speakOutput = 'Hello World! Start! I saved this attributes ${sessionAttributes.startedText}';
         return handlerInput.responseBuilder
             .speak(speakOutput)
             //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
@@ -34,7 +40,9 @@ const StopSessionIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'StopSessionIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'Hello World Stop!';
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+
+        const speakOutput = 'Hello World Stop! ${sessionAttributes.startedText}';
         return handlerInput.responseBuilder
             .speak(speakOutput)
             //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
