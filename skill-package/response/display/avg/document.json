@@ -1,0 +1,105 @@
+{
+    "type": "APL",
+    "version": "1.4",
+    "graphics": {
+        "ProgressRadial": {
+            "type": "AVG",
+            "version": "1.0",
+            "parameters": [
+                "Progress"
+            ],
+            "width": 100,
+            "height": 500,
+            "scaleTypeWidth": "stretch",
+            "items": [
+                {
+                    "type": "group",
+                    "description": "Progress Radial Group",
+                    "items": [
+                        {
+                            "type": "path",
+                            "description": "Progress Radial background",
+                            "pathData": "M240,0 a240,240,0,1,1,0,480 a240,240,0,1,1,0,-480",
+                            "stroke": "#223",
+                            "strokeDashArray": [
+                                1508,
+                                1508
+                            ],
+                            "strokeWidth": 50
+                        },
+                        {
+                            "type": "path",
+                            "description": "Progress Radial",
+                            "pathData": "M240,0 a240,240,0,1,1,0,480 a240,240,0,1,1,0,-480",
+                            "stroke": "#ADFF2F",
+                            "strokeDashArray": [
+                                "${Progress}",
+                                1508
+                            ],
+                            "strokeWidth": 50
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "mainTemplate": {
+        "items": {
+            "type": "VectorGraphic",
+            "source": "ProgressRadial",
+            "scale": "fill",
+            "width": "100%",
+            "bind": [
+                {
+                    "name": "Position",
+                    "value": 0.50
+                },
+                {
+                    "name": "OldPosition",
+                    "value": 0.50
+                },
+                {
+                    "name": "Progress",
+                    "value": 900
+                }
+            ],
+            "Progress": "${Progress}",
+            "onDown": [
+                {
+                    "type": "SetValue",
+                    "property": "ShowButton",
+                    "value": true
+                },
+                {
+                    "type": "SetValue",
+                    "property": "OldPosition",
+                    "value": "${Position}"
+                },
+                {
+                    "type": "SetValue",
+                    "property": "Position",
+                    "value": "${0, Math.clamp((event.viewport.x - 45) / (event.viewport.width - 90), 1)}"
+                }
+            ],
+            "onUp": [
+                {
+                    "type": "SetValue",
+                    "property": "ShowButton",
+                    "value": false
+                },
+                {
+                    "type": "SetValue",
+                    "description": "Reset the position if we release the pointer at some far location",
+                    "when": "${!event.inBounds}",
+                    "property": "Position",
+                    "value": "${OldPosition}"
+                }
+            ],
+            "onMove": {
+                "type": "SetValue",
+                "property": "Position",
+                "value": "${0, Math.clamp((event.viewport.x - 45) / (event.viewport.width - 90), 1)}"
+            }
+        }
+    }
+}
