@@ -15,7 +15,7 @@ function getAnnouncementTimer(handlerInput, duration) {
             }
         },
         triggeringBehavior: {
-            operation {
+            operation: {
                 type: 'ANNOUNCE',
                 textToAnnounce: [{
                     locale: 'en-US',
