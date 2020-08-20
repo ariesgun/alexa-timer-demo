@@ -54,7 +54,13 @@ const StartSessionIntentHandler = {
         
         console.log('About to create timer: ' + JSON.stringify(timer));
         
-        
+        try {
+            const timerServiceClient = serviceClientFactory.getTimerManagementServiceClient();
+            const timersList = await timerServiceClient.getTimers();
+            console.log('Current timers: ' + JSON.stringify(timersList));
+            
+            
+        }
         
         
 
