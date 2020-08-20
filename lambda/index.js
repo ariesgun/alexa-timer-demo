@@ -81,7 +81,28 @@ const StartSessionIntentHandler = {
                 throw { statusCode: 308, message: 'Timer did not start' };
             }
         } catch (error) {
-            
+            if(error.statusCode === 401) {
+                console.log('Unauthorized!');
+                // we send a request to enable by voice
+                // note that you'll need another handler to process the result, see AskForResponseHandler
+                return handlerInput.responseBuilder
+                    .addDirective({
+                    type: 'Connections.SendRequest',
+                    'name': 'AskFor',
+                    'payload': {
+                        '@type': 'AskForPermissionsConsentRequest',
+                        '@version': '1',
+                        'permissionScope': TIMERS_PERMISSION
+                    },
+                    token: 'verifier'
+                }).getResponse();
+            }
+            else {
+                return handlerInput.responseBuilder
+                        .speak('Unable to create timer. What would you do next?')
+                        .reprompt('What would you do next')
+                        .getResponse();
+            }
         }
         
         
