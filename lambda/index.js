@@ -3,6 +3,33 @@
 // session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
 
+const TIMERS_PERMISSION = 'alexa::alerts::timers:skill:readwrite';
+
+function getAnnouncementTimer(handlerInput, duration) {
+    return {
+        duration: duration,
+        label: "My announcement Timer",
+        creationBehavior: {
+            displayExperience: {
+                visibility: 'VISIBLE'
+            }
+        },
+        triggeringBehavior: {
+            operation {
+                type: 'ANNOUNCE',
+                textToAnnounce: [{
+                    locale: 'en-US',
+                    text: 'That was your timer'
+                }]
+            },
+            notificationConfig: {
+                playAudible: True
+            }
+        }
+    }
+}
+
+
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
@@ -21,6 +48,9 @@ const StartSessionIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'StartSessionIntent';
     },
     handle(handlerInput) {
+        
+        const {serviceClientFactory} = handlerInput;
+        const timer = getAnnouncementTimer(handlerInput, duration);
 
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         sessionAttributes.startedText = "Wow, it is started";
