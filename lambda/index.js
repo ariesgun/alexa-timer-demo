@@ -59,7 +59,11 @@ const StartSessionIntentHandler = {
             const timersList = await timerServiceClient.getTimers();
             console.log('Current timers: ' + JSON.stringify(timersList));
             
+            const timerResponse = await timerServiceClient.createTimer(timer);
+            console.log('Timer creation response: ' + JSON.stringify(timerResponse));
             
+            const timerId = timerResponse.id;
+            const timerStatus = timerResponse.status;
         }
         
         
