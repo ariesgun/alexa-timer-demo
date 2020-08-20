@@ -51,6 +51,8 @@ const StartSessionIntentHandler = {
         
         const {serviceClientFactory} = handlerInput;
         const timer = getAnnouncementTimer(handlerInput, duration);
+        
+        
 
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         sessionAttributes.startedText = "Wow, it is started";
