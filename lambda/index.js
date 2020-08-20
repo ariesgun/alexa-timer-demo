@@ -64,6 +64,9 @@ const StartSessionIntentHandler = {
             
             const timerId = timerResponse.id;
             const timerStatus = timerResponse.status;
+            
+            const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+            
         } catch (error) {
             
         }
