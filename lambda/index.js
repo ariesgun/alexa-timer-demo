@@ -50,7 +50,7 @@ const StartSessionIntentHandler = {
     handle(handlerInput) {
         
         const {serviceClientFactory} = handlerInput;
-        const timer = getAnnouncementTimer(handlerInput, duration);
+        const timer = getAnnouncementTimer(handlerInput, 'PT10M');
         
         
 
