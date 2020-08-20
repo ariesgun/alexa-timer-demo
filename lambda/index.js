@@ -26,7 +26,7 @@ function getAnnouncementTimer(handlerInput, duration) {
                 playAudible: True
             }
         }
-    }
+    };
 }
 
 
