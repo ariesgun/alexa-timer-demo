@@ -52,6 +52,10 @@ const StartSessionIntentHandler = {
         const {serviceClientFactory} = handlerInput;
         const timer = getAnnouncementTimer(handlerInput, 'PT10M');
         
+        console.log('About to create timer: ' + JSON.stringify(timer));
+        
+        
+        
         
 
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
