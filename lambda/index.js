@@ -68,6 +68,7 @@ const StartSessionIntentHandler = {
             if (timerStatus === 'ON') {
                 const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
                 sessionAttributes['startedText'] = "Wow, it is started";
+                sessionAttributes['lastTimerId'] = timerId;
                 
                 handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
     
