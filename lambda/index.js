@@ -70,11 +70,11 @@ const StartSessionIntentHandler = {
             
             handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
 
-        const speakOutput = 'Hello World! Start! I saved this attributes ${sessionAttributes.startedText}';
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
-            .getResponse();
+            const speakOutput = 'Hello World! Start! I saved this attributes ${sessionAttributes.startedText}';
+            return handlerInput.responseBuilder
+                .speak(speakOutput)
+                //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+                .getResponse();
             
         } catch (error) {
             
@@ -82,16 +82,16 @@ const StartSessionIntentHandler = {
         
         
 
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        sessionAttributes.startedText = "Wow, it is started";
+        // const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        // sessionAttributes.startedText = "Wow, it is started";
 
-        handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+        // handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
 
-        const speakOutput = 'Hello World! Start! I saved this attributes ${sessionAttributes.startedText}';
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
-            .getResponse();
+        // const speakOutput = 'Hello World! Start! I saved this attributes ${sessionAttributes.startedText}';
+        // return handlerInput.responseBuilder
+        //     .speak(speakOutput)
+        //     //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+        //     .getResponse();
     }
 };
 const StopSessionIntentHandler = {
