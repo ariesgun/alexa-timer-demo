@@ -47,7 +47,7 @@ const StartSessionIntentHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'StartSessionIntent';
     },
-    handle(handlerInput) {
+    async handle(handlerInput) {
         
         const {serviceClientFactory} = handlerInput;
         const timer = getAnnouncementTimer(handlerInput, 'PT10M');
