@@ -20,6 +20,7 @@ function getAnnouncementTimer(handlerInput, duration) {
                 textToAnnounce: [{
                      locale: "en-US",
                      text: "That's enough stretching, start to run"
+                ]}
             },
             notificationConfig: {
                 playAudible: false
