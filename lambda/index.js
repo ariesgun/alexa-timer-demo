@@ -16,7 +16,10 @@ function getAnnouncementTimer(handlerInput, duration) {
         },
         triggeringBehavior: {
             operation: {
-                type: 'NOTIFY_ONLY'
+                type : "ANNOUNCE",
+                textToAnnounce: [{
+                     "locale": "en-US",
+                     "text": "That's enough stretching, start to run"
             },
             notificationConfig: {
                 playAudible: false
