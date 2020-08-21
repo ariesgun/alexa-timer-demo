@@ -17,7 +17,6 @@ function getAnnouncementTimer(handlerInput, duration) {
         triggeringBehavior: {
             operation: {
                 type: 'NOTIFY_ONLY'
-                
             },
             notificationConfig: {
                 playAudible: true
