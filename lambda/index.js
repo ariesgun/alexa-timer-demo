@@ -3,7 +3,7 @@
 // session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
 
-const TIMERS_PERMISSION = 'alexa::alerts::timers:skill:readwrite';
+const TIMERS_PERMISSION = 'alexa::alerts:timers:skill:readwrite';
 
 function getAnnouncementTimer(handlerInput, duration) {
     return {
