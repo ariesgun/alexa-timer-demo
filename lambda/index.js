@@ -19,7 +19,7 @@ function getAnnouncementTimer(handlerInput, duration) {
                 type: 'NOTIFY_ONLY'
             },
             notificationConfig: {
-                playAudible: true
+                playAudible: false
             }
         }
     };
