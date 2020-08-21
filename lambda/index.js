@@ -11,7 +11,7 @@ function getAnnouncementTimer(handlerInput, duration) {
         label: "My announcement Timer",
         creationBehavior: {
             displayExperience: {
-                visibility: 'VISIBLE'
+                visibility: 'HIDDEN'
             }
         },
         triggeringBehavior: {
