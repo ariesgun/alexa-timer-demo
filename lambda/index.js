@@ -16,7 +16,7 @@ function getAnnouncementTimer(handlerInput, duration) {
         },
         triggeringBehavior: {
             operation: {
-                type: 'NOTIFY_ONLY ',
+                type: 'NOTIFY_ONLY',
                 textToAnnounce: [{
                     locale: 'en-US',
                     text: 'That was your timer'
