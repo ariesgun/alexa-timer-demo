@@ -8,8 +8,8 @@
             "parameters": [
                 "Progress"
             ],
-            "width": 100,
-            "height": 500,
+            "width": 480,
+            "height": 480,
             "scaleTypeWidth": "stretch",
             "items": [
                 {

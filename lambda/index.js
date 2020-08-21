@@ -3,6 +3,33 @@
 // session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
 
+const TIMERS_PERMISSION = 'alexa::alerts::timers:skill:readwrite';
+
+function getAnnouncementTimer(handlerInput, duration) {
+    return {
+        duration: duration,
+        label: "My announcement Timer",
+        creationBehavior: {
+            displayExperience: {
+                visibility: 'VISIBLE'
+            }
+        },
+        triggeringBehavior: {
+            operation: {
+                type: 'ANNOUNCE',
+                textToAnnounce: [{
+                    locale: 'en-US',
+                    text: 'That was your timer'
+                }]
+            },
+            notificationConfig: {
+                playAudible: true
+            }
+        }
+    };
+}
+
+
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
@@ -20,18 +47,76 @@ const StartSessionIntentHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'StartSessionIntent';
     },
-    handle(handlerInput) {
+    async handle(handlerInput) {
 
-        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-        sessionAttributes.startedText = "Wow, it is started";
+        const { serviceClientFactory } = handlerInput;
+        const timer = getAnnouncementTimer(handlerInput, 'PT10M');
 
-        handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+        console.log('About to create timer: ' + JSON.stringify(timer));
 
-        const speakOutput = 'Hello World! Start! I saved this attributes ${sessionAttributes.startedText}';
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
-            .getResponse();
+        try {
+            const timerServiceClient = serviceClientFactory.getTimerManagementServiceClient();
+            const timersList = await timerServiceClient.getTimers();
+            console.log('Current timers: ' + JSON.stringify(timersList));
+
+            const timerResponse = await timerServiceClient.createTimer(timer);
+            console.log('Timer creation response: ' + JSON.stringify(timerResponse));
+
+            const timerId = timerResponse.id;
+            const timerStatus = timerResponse.status;
+
+            if (timerStatus === 'ON') {
+                const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+                sessionAttributes['startedText'] = "Wow, it is started";
+                sessionAttributes['lastTimerId'] = timerId;
+
+                handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+
+                const speakOutput = 'Hello World! Start Test! I saved this attributes';
+                return handlerInput.responseBuilder
+                    .speak(speakOutput)
+                    //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+                    .getResponse();
+            } else {
+                throw { statusCode: 308, message: 'Timer did not start' };
+            }
+        } catch (error) {
+            if (error.statusCode === 401) {
+                console.log('Unauthorized!');
+                // we send a request to enable by voice
+                // note that you'll need another handler to process the result, see AskForResponseHandler
+                return handlerInput.responseBuilder
+                    .addDirective({
+                        type: 'Connections.SendRequest',
+                        'name': 'AskFor',
+                        'payload': {
+                            '@type': 'AskForPermissionsConsentRequest',
+                            '@version': '1',
+                            'permissionScope': TIMERS_PERMISSION
+                        },
+                        token: 'verifier'
+                    }).getResponse();
+            }
+            else {
+                return handlerInput.responseBuilder
+                    .speak('Unable to create timer. What would you do next?')
+                    .reprompt('What would you do next')
+                    .getResponse();
+            }
+        }
+
+
+
+        // const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+        // sessionAttributes.startedText = "Wow, it is started";
+
+        // handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
+
+        // const speakOutput = 'Hello World! Start! I saved this attributes ${sessionAttributes.startedText}';
+        // return handlerInput.responseBuilder
+        //     .speak(speakOutput)
+        //     //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+        //     .getResponse();
     }
 };
 const StopSessionIntentHandler = {

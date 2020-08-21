@@ -1,0 +1,113 @@
+{
+    "type": "APL",
+    "version": "1.4",
+    "description": "This APL document places text on the screen and includes a button that sends the skill a message when selected. The button is a pre-defined responsive component from the alexa-layouts package.",
+    "settings": {
+        "idleTimeout": 120000
+    },
+    "import": [
+        {
+            "name": "alexa-layouts",
+            "version": "1.2.0"
+        }
+    ],
+    "mainTemplate": {
+        "parameters": [
+            "payload"
+        ],
+        "items": [
+            {
+                "type": "Container",
+                "bind": [
+                    {
+                        "name": "minutes",
+                        "value": 25
+                    },
+                    {
+                        "name": "seconds",
+                        "value": 0
+                    }
+                ],
+                "height": "100vh",
+                "width": "100vw",
+                "handleTick": [
+                    {
+                        "when": "${elapsedTime <= 1500000}",
+                        "minimumDelay": 100,
+                        "commands": [
+                            {
+                                "type": "SetValue",
+                                "property": "seconds",
+                                "value": "${(60 - Math.floor(elapsedTime / 1000) % 60)}"
+                            }
+                        ]
+                    },
+                    {
+                        "when": "${minutes > 0}",
+                        "minimumDelay": 1000,
+                        "commands": [
+                            {
+                                "type": "SetValue",
+                                "property": "minutes",
+                                "value": "${minutes - (Math.floor(elapsedTime / 60000)) - ((Math.floor(elapsedTime / 1000) % 60) == 0 ? 1 : 0)}"
+                            }
+                        ]
+                    }
+                ],
+                "items": [
+                    {
+                        "type": "Frame",
+                        "width": "100%",
+                        "backgroundColor": "green",
+                        "spacing": "@spacingMedium",
+                        "items": [
+                            {
+                                "type": "Text",
+                                "fontFamily": "serif",
+                                "fontSize": "32dp",
+                                "text": "FOCUS SESSION",
+                                "width": "100%",
+                                "textAlign": "center",
+                                "paddingTop": "64dp",
+                                "paddingBottom": "@spacingMedium"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Frame",
+                        "backgroundColor": "black",
+                        "spacing": "@spacingMedium",
+                        "width": "100%",
+                        "items": [
+                            {
+                                "type": "Text",
+                                "fontSize": "54dp",
+                                "fontWeight": "bold",
+                                "text": "${minutes < 10 ? '0' : ''}${minutes} : ${seconds < 10 ? '0' : ''}${seconds == 60 ? '00' : seconds}",
+                                "width": "100%",
+                                "textAlign": "center",
+                                "paddingTop": "70dp"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Frame",
+                        "backgroundColor": "black",
+                        "width": "100%",
+                        "items": [
+                            {
+                                "type": "Text",
+                                "fontSize": "22dp",
+                                "text": "25-minute session ${elapsedTime / 1000}",
+                                "width": "100%",
+                                "textAlign": "center",
+                                "paddingTop": "0dp",
+                                "paddingBottom": "@spacingMedium"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    }
+}
