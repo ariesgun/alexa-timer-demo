@@ -122,19 +122,12 @@ const StartSessionIntentHandler = {
                                                 ]
                                             }
                                         ]
-                                    },
-                                    {
-                                        type: "SendEvent",
-                                        when: "${elapsedTime > 10000}",
-                                        arguments: [
-                                          "timeout clicked the button"
-                                        ]
                                     }
                                 ]
                             }
                         ]
                     })
-                    //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+                    .reprompt('add a reprompt if you want to keep the session open for the user to respond')
                     .getResponse();
             } else {
                 throw { statusCode: 308, message: 'Timer did not start' };
