@@ -125,7 +125,7 @@ const StartSessionIntentHandler = {
                                     },
                                     {
                                         type: "SendEvent",
-                                        when: "${elapsedTime > 120000}",
+                                        when: "${elapsedTime > 0}",
                                         arguments: [
                                           "timeout clicked the button"
                                         ]
