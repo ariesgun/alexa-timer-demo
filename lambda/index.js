@@ -77,7 +77,12 @@ const StartSessionIntentHandler = {
                 const speakOutput = 'Hello and World! Start Test! I saved this attributes';
                 return handlerInput.responseBuilder
                     .speak(speakOutput)
-                    
+                    .addDirective({
+                        type: 'Alexa.Presentation.APL.RenderDocument',
+                        token: "helloworldWithButtonToken",
+                        document: main,
+                        datasources: {}
+                    })
                     //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
                     .getResponse();
             } else {
