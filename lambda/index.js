@@ -113,7 +113,7 @@ const StartSessionIntentHandler = {
                                             },
                                             {
                                                 type: "Idle",
-                                                delay: "80000"
+                                                delay: "60000"
                                             },
                                             {
                                                 type: "SendEvent",
