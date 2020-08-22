@@ -117,7 +117,6 @@ const StartSessionIntentHandler = {
                                             } 
                                         ]
                                     },
-                                    
                                     {
                                         type: "SendEvent",
                                         arguments: [
