@@ -44,6 +44,20 @@ const LaunchRequestHandler = {
             .getResponse();
     }
 };
+const SendEventIntentHandler = {
+  canHandle(handlerInput) {
+    // Check for SendEvent sent from the button
+    return handlerInput.requestEnvelope.request.type === 'Alexa.Presentation.APL.UserEvent'
+  },
+  handle(handlerInput) {
+    // Take argument sent from the button to speak back to the user
+    console.log(handlerInput.requestEnvelope.request.source.id)
+    const speechText = handlerInput.requestEnvelope.request.arguments[0]
+    return handlerInput.responseBuilder
+        .speak(speechText)
+        .getResponse()
+  }
+};
 const StartSessionIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -353,6 +367,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
         StartSessionIntentHandler,
+        SendEventIntentHandler,
         StopSessionIntentHandler,
         PauseSessionIntentHandler,
         HelpIntentHandler,
