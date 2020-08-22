@@ -5,7 +5,7 @@ const Alexa = require('ask-sdk-core');
 
 const TIMERS_PERMISSION = 'alexa::alerts::timers:skill:readwrite';
 
-const main = require('../skill-package/response/display/avg/document.json');
+const main = require('./documents/session.json');
 
 function getAnnouncementTimer(handlerInput, duration) {
     return {
