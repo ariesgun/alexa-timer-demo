@@ -118,7 +118,7 @@ const StartSessionIntentHandler = {
                                             {
                                                 type: "SendEvent",
                                                 arguments: [
-                                                  "timeout clicked the button"
+                                                  "timeout clicked the button 2"
                                                 ]
                                             }
                                         ]
