@@ -70,6 +70,98 @@
                         ]
                     }
                 ]
+            },
+            {
+                "type": "Container",
+                "background": "blue",
+                "bind": [
+                    {
+                        "name": "repeatCounter",
+                        "value": 0
+                    },
+                    {
+                        "name": "minutes",
+                        "value": 25
+                    },
+                    {
+                        "name": "seconds",
+                        "value": 0
+                    }
+                ],
+                "height": "100vh",
+                "width": "100vw",
+                "handleTick": [
+                    {
+                        "when": "${seconds >= 0 && minutes >= 0}",
+                        "minimumDelay": 1000,
+                        "commands": [
+                            {
+                                "type": "SetValue",
+                                "property": "repeatCounter",
+                                "value": "${repeatCounter + 1}"
+                            },
+                            {
+                                "type": "SetValue",
+                                "property": "minutes",
+                                "value": "${24 - Math.round(elapsedTime / 60000)}"
+                            },
+                            {
+                                "type": "SetValue",
+                                "property": "seconds",
+                                "value": "${(60 - Math.round(elapsedTime / 1000) % 60)}"
+                            }
+                        ]
+                    }
+                ],
+                "items": [
+                    {
+                        "type": "Frame",
+                        "backgroundColor": "green",
+                        "spacing": "@spacingMedium",
+                        "items": [
+                            {
+                                "type": "Text",
+                                "fontFamily": "serif",
+                                "fontSize": "32dp",
+                                "text": "FOCUS SESSION",
+                                "width": "100%",
+                                "textAlign": "center",
+                                "paddingTop": "64dp",
+                                "paddingBottom": "@spacingMedium"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Frame",
+                        "backgroundColor": "black",
+                        "spacing": "@spacingMedium",
+                        "items": [
+                            {
+                                "type": "Text",
+                                "fontSize": "52dp",
+                                "text": "${minutes < 10 ? '0' : ''}${minutes} : ${seconds < 10 ? '0' : ''}${seconds}",
+                                "width": "100%",
+                                "textAlign": "center",
+                                "paddingTop": "70dp"
+                            }
+                        ]
+                    },
+                    {
+                        "type": "Frame",
+                        "backgroundColor": "black",
+                        "items": [
+                            {
+                                "type": "Text",
+                                "fontSize": "24dp",
+                                "text": "25-minute session",
+                                "width": "100%",
+                                "textAlign": "center",
+                                "paddingTop": "0dp",
+                                "paddingBottom": "@spacingMedium"
+                            }
+                        ]
+                    }
+                ]
             }
         ]
     }
