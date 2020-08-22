@@ -98,8 +98,8 @@
                             {
                                 "type": "SetValue",
                                 "property": "repeatCounter",
-                                "value": "${repeatCounter + 1}"
-                            },
+                                "value": "123"
+                            }
                         ]
                     }
                 ],
