@@ -84,6 +84,15 @@
                                 "value": "${((Math.floor(elapsedTime / 1000) % 60) == 0 ? 59 : 59 - Math.floor(elapsedTime / 1000) % 60)}"
                             }
                         ]
+                    },
+                    {
+                        "when": "${seconds == 0 && minutes == 0}",
+                        "minimumDelay": 100,
+                        "commands": [
+                            {
+                                "type": "SendEvent"
+                            }    
+                        ]
                     }
                 ],
                 "items": [
