@@ -74,7 +74,7 @@ const StartSessionIntentHandler = {
 
                 handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
 
-                const speakOutput = 'Hello and World! Start Test! I saved this attributes';
+                const speakOutput = 'Focus session starts from now.';
                 return handlerInput.responseBuilder
                     .speak(speakOutput)
                     .addDirective({
