@@ -99,38 +99,6 @@ const StartSessionIntentHandler = {
                                         delay: "60000"
                                     },
                                     {
-                                        type: "Idle",
-                                        delay: "60000"
-                                    },
-                                    {
-                                        type: "Idle",
-                                        delay: "60000"
-                                    },
-                                    {
-                                        type: "Idle",
-                                        delay: "60000"
-                                    },
-                                    {
-                                        type: "Idle",
-                                        delay: "60000"
-                                    },
-                                    {
-                                        type: "Idle",
-                                        delay: "60000"
-                                    },
-                                    {
-                                        type: "Idle",
-                                        delay: "60000"
-                                    },
-                                    {
-                                        type: "Idle",
-                                        delay: "60000"
-                                    },
-                                    {
-                                        type: "Idle",
-                                        delay: "60000"
-                                    },
-                                    {
                                         type: "SendEvent",
                                         arguments: [
                                           "timeout clicked the button"
