@@ -94,7 +94,12 @@
                                 "arguments": [
                                   "Time is up"
                                 ]
-                            }    
+                            },
+                            {
+                                "type": "SetValue",
+                                "property": "repeatCounter",
+                                "value": "${repeatCounter + 1}"
+                            },
                         ]
                     }
                 ],
