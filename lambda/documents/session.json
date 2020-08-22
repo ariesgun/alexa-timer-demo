@@ -65,7 +65,7 @@
                 "width": "100vw",
                 "handleTick": [
                     {
-                        "when": "${seconds >= 0 && minutes >= 0}",
+                        "when": "${seconds >= 0 && minutes > 0}",
                         "minimumDelay": 1000,
                         "commands": [
                             {
