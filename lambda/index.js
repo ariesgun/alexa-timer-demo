@@ -25,7 +25,7 @@ function getAnnouncementTimer(handlerInput, duration) {
                 }]
             },
             notificationConfig: {
-                playAudible: true
+                playAudible: false
             }
         }
     };
