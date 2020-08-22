@@ -84,63 +84,62 @@ const StartSessionIntentHandler = {
                         datasources: {}
                     })
                     .addDirective({
-                type: 'Alexa.Presentation.APL.ExecuteCommands',
-                token: 'helloworldWithButtonToken2',
-                commands: [
-                    {
-                        type: "Sequential",
+                        type: 'Alexa.Presentation.APL.ExecuteCommands',
+                        token: 'sessionToken',
                         commands: [
-                            animateItemCommand, 
                             {
-                                type: "Idle",
-                                delay: "60000"
-                            },
-                            {
-                                type: "Idle",
-                                delay: "60000"
-                            },
-                            {
-                                type: "Idle",
-                                delay: "60000"
-                            },
-                            {
-                                type: "Idle",
-                                delay: "60000"
-                            },
-                            {
-                                type: "Idle",
-                                delay: "60000"
-                            },
-                            {
-                                type: "Idle",
-                                delay: "60000"
-                            },
-                            {
-                                type: "Idle",
-                                delay: "60000"
-                            },
-                            {
-                                type: "Idle",
-                                delay: "60000"
-                            },
-                            {
-                                type: "Idle",
-                                delay: "60000"
-                            },
-                            {
-                                type: "Idle",
-                                delay: "60000"
-                            },
-                            {
-                                type: "SendEvent",
-                                arguments: [
-                                  "timeout clicked the button"
+                                type: "Sequential",
+                                commands: [
+                                    {
+                                        type: "Idle",
+                                        delay: "60000"
+                                    },
+                                    {
+                                        type: "Idle",
+                                        delay: "60000"
+                                    },
+                                    {
+                                        type: "Idle",
+                                        delay: "60000"
+                                    },
+                                    {
+                                        type: "Idle",
+                                        delay: "60000"
+                                    },
+                                    {
+                                        type: "Idle",
+                                        delay: "60000"
+                                    },
+                                    {
+                                        type: "Idle",
+                                        delay: "60000"
+                                    },
+                                    {
+                                        type: "Idle",
+                                        delay: "60000"
+                                    },
+                                    {
+                                        type: "Idle",
+                                        delay: "60000"
+                                    },
+                                    {
+                                        type: "Idle",
+                                        delay: "60000"
+                                    },
+                                    {
+                                        type: "Idle",
+                                        delay: "60000"
+                                    },
+                                    {
+                                        type: "SendEvent",
+                                        arguments: [
+                                          "timeout clicked the button"
+                                        ]
+                                    }
                                 ]
                             }
                         ]
-                    }
-                ]
-            })
+                    })
                     //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
                     .getResponse();
             } else {
