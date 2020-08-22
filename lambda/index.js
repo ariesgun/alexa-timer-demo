@@ -52,7 +52,7 @@ const StartSessionIntentHandler = {
     async handle(handlerInput) {
 
         const { serviceClientFactory } = handlerInput;
-        const timer = getAnnouncementTimer(handlerInput, 'PT1M');
+        const timer = getAnnouncementTimer(handlerInput, 'PT2M');
 
         console.log('About to create timer: ' + JSON.stringify(timer));
 
