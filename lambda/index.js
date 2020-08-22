@@ -79,7 +79,7 @@ const StartSessionIntentHandler = {
                     .speak(speakOutput)
                     .addDirective({
                         type: 'Alexa.Presentation.APL.RenderDocument',
-                        token: "helloworldWithButtonToken",
+                        token: "sessionToken",
                         document: main,
                         datasources: {}
                     })
