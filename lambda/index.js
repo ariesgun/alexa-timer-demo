@@ -3,7 +3,9 @@
 // session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
 
-const TIMERS_PERMISSION = 'alexa::alerts:timers:skill:readwrite';
+const TIMERS_PERMISSION = 'alexa::alerts::timers:skill:readwrite';
+
+const main = require('../skill-package/response/display/avg/document.json');
 
 function getAnnouncementTimer(handlerInput, duration) {
     return {
@@ -11,7 +13,7 @@ function getAnnouncementTimer(handlerInput, duration) {
         label: "My announcement Timer",
         creationBehavior: {
             displayExperience: {
-                visibility: 'HIDDEN'
+                visibility: 'VISIBLE'
             }
         },
         triggeringBehavior: {
@@ -23,7 +25,7 @@ function getAnnouncementTimer(handlerInput, duration) {
                 }]
             },
             notificationConfig: {
-                playAudible: false
+                playAudible: true
             }
         }
     };
@@ -50,7 +52,7 @@ const StartSessionIntentHandler = {
     async handle(handlerInput) {
 
         const { serviceClientFactory } = handlerInput;
-        const timer = getAnnouncementTimer(handlerInput, 'PT2M');
+        const timer = getAnnouncementTimer(handlerInput, 'PT10M');
 
         console.log('About to create timer: ' + JSON.stringify(timer));
 
@@ -75,6 +77,12 @@ const StartSessionIntentHandler = {
                 const speakOutput = 'Hello and World! Start Test! I saved this attributes';
                 return handlerInput.responseBuilder
                     .speak(speakOutput)
+                    .addDirective({
+                        type: 'Alexa.Presentation.APL.RenderDocument',
+                        token: "helloworldWithButtonToken",
+                        document: main,
+                        datasources: {}
+                    })
                     //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
                     .getResponse();
             } else {
@@ -238,5 +246,4 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addErrorHandlers(
         ErrorHandler,
     )
-    .withApiClient(new Alexa.DefaultApiClient())
     .lambda();
