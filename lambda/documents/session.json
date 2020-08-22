@@ -1,0 +1,74 @@
+{
+    "type": "APL",
+    "version": "1.4",
+    "graphics": {
+        "ProgressRadial": {
+            "type": "AVG",
+            "version": "1.0",
+            "parameters": [
+                "progress"
+            ],
+            "width": 480,
+            "height": 480,
+            "scaleTypeWidth": "stretch",
+            "items": [
+                {
+                    "type": "group",
+                    "description": "Progress Radial Group",
+                    "items": [
+                        {
+                            "type": "path",
+                            "description": "Progress Radial background",
+                            "pathData": "M240,0 a240,240,0,1,1,0,480 a240,240,0,1,1,0,-480",
+                            "stroke": "#223",
+                            "strokeDashArray": [
+                                1508,
+                                1508
+                            ],
+                            "strokeWidth": 50
+                        },
+                        {
+                            "type": "path",
+                            "description": "Progress Radial",
+                            "pathData": "M240,0 a240,240,0,1,1,0,480 a240,240,0,1,1,0,-480",
+                            "stroke": "#ADFF2F",
+                            "strokeDashArray": [
+                                "${progress}",
+                                1508
+                            ],
+                            "strokeWidth": 50
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "mainTemplate": {
+        "items": {
+            "type": "VectorGraphic",
+            "source": "ProgressRadial",
+            "scale": "fill",
+            "width": "100%",
+            "bind": [
+                {
+                    "name": "progress",
+                    "value": 0
+                }
+            ],
+            "progress": "${progress}",
+            "handleTick": [
+                {
+                    "minimumDelay": 100,
+                    "commands": [
+                        {
+                            "when": "${progress < 1508}",
+                            "type": "SetValue",
+                            "property": "progress",
+                            "value": "${progress + 2.513}"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}
