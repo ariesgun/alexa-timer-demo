@@ -102,16 +102,22 @@ const StartSessionIntentHandler = {
                         token: 'sessionToken',
                         commands: [
                             {
-                                type: "Sequential",
+                                type: "Parallel",
                                 commands: [
                                     {
-                                        type: "Idle",
-                                        delay: "60000"
+                                        type: "Sequential",
+                                        commands: [
+                                            {
+                                                type: "Idle",
+                                                delay: "60000"
+                                            },
+                                            {
+                                                type: "Idle",
+                                                delay: "80000"
+                                            } 
+                                        ]
                                     },
-                                    {
-                                        type: "Idle",
-                                        delay: "80000"
-                                    },
+                                    
                                     {
                                         type: "SendEvent",
                                         arguments: [
