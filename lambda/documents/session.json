@@ -44,31 +44,33 @@
         }
     },
     "mainTemplate": {
-        "items": {
-            "type": "VectorGraphic",
-            "source": "ProgressRadial",
-            "scale": "fill",
-            "width": "100%",
-            "bind": [
-                {
-                    "name": "progress",
-                    "value": 0
-                }
-            ],
-            "progress": "${progress}",
-            "handleTick": [
-                {
-                    "minimumDelay": 100,
-                    "commands": [
-                        {
-                            "when": "${progress < 1508}",
-                            "type": "SetValue",
-                            "property": "progress",
-                            "value": "${progress + 2.513}"
-                        }
-                    ]
-                }
-            ]
-        }
+        "items": [
+            {
+                "type": "VectorGraphic",
+                "source": "ProgressRadial",
+                "scale": "fill",
+                "width": "100%",
+                "bind": [
+                    {
+                        "name": "progress",
+                        "value": 0
+                    }
+                ],
+                "progress": "${progress}",
+                "handleTick": [
+                    {
+                        "minimumDelay": 100,
+                        "commands": [
+                            {
+                                "when": "${progress < 1508}",
+                                "type": "SetValue",
+                                "property": "progress",
+                                "value": "${progress + 2.513}"
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
     }
 }
