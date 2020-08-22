@@ -154,7 +154,7 @@
                             {
                                 "type": "Text",
                                 "fontSize": "24dp",
-                                "text": "25-minute session",
+                                "text": "25-minute session ${repeatCounter}",
                                 "width": "100%",
                                 "textAlign": "center",
                                 "paddingTop": "0dp",
