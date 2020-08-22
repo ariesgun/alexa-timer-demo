@@ -51,7 +51,7 @@ const SendEventIntentHandler = {
   },
   handle(handlerInput) {
     // Take argument sent from the button to speak back to the user
-    console.log(handlerInput.requestEnvelope.request.source.id)
+    console.log('Soure id ' + handlerInput.requestEnvelope.request.source.id)
     const speechText = handlerInput.requestEnvelope.request.arguments[0]
     return handlerInput.responseBuilder
         .speak(speechText)
