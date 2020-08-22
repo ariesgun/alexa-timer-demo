@@ -103,13 +103,13 @@
                                 "progress": "${progress}",
                                 "handleTick": [
                                     {
-                                        "minimumDelay": 100,
+                                        "minimumDelay": 1000,
                                         "commands": [
                                             {
                                                 "when": "${progress < 1508}",
                                                 "type": "SetValue",
                                                 "property": "progress",
-                                                "value": "${progress + 2.513}"
+                                                "value": "${progress + 1}"
                                             }
                                         ]
                                     }
