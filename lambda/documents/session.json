@@ -86,7 +86,7 @@
                         ]
                     },
                     {
-                        "when": "${seconds == 0 && minutes == 0}",
+                        "when": "${elapsedTime > 5000}",
                         "minimumDelay": 100,
                         "commands": [
                             {
