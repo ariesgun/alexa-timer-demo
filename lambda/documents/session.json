@@ -54,7 +54,7 @@
                     },
                     {
                         "name": "minutes",
-                        "value": 25
+                        "value": 2
                     },
                     {
                         "name": "seconds",
@@ -76,7 +76,7 @@
                             {
                                 "type": "SetValue",
                                 "property": "minutes",
-                                "value": "${Math.floor(elapsedTime / 60000) >= 25 ? 0 : 24 - Math.floor(elapsedTime / 60000)}"
+                                "value": "${Math.floor(elapsedTime / 60000) >= 2 ? 0 : 1 - Math.floor(elapsedTime / 60000)}"
                             },
                             {
                                 "type": "SetValue",
