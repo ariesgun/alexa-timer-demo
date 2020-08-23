@@ -91,6 +91,7 @@ function updateSessionAttributes(newSession, sessionAttributes) {
   sessionAttributes['durationMS'] = DURATION_DICT[newSession].duration * 60000;
   sessionAttributes['minutes'] = DURATION_DICT[newSession].duration;
   sessionAttributes['seconds'] = 0;
+  sessionAttributes['progress'] = 0;
   sessionAttributes['startTime'] = moment();
 }
 
