@@ -55,15 +55,16 @@ function renderSessionAPLDocument(attributesManager, responseBuilder) {
         attributesManager['curSession'] = 'focus';
     }
     
+    const DURATION_MS = DURATION_DICT[attributesManager['curSession']].duration * 60000;
+    
     responseBuilder.addDirective({
         type: 'Alexa.Presentation.APL.RenderDocument',
         token: "sessionToken",
         document: main,
         datasources: {
             sessionData: {
-                title: "FOCUS",
-                session: "focus",
-                duration: DURATION
+                session: DURATION_DICT[''].title,
+                duration: DURATION_DICT[''].duration
                 
             }
         }
