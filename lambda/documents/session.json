@@ -86,12 +86,12 @@
                             {
                                 "type": "SetValue",
                                 "property": "minutes",
-                                "value": "0"
+                                "value": "00"
                             },
                             {
                                 "type": "SetValue",
                                 "property": "seconds",
-                                "value": "0"
+                                "value": "00"
                             }
                         ]
                     }
