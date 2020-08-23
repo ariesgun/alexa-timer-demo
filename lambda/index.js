@@ -59,7 +59,7 @@ const SessionFinishedIntentHandler = {
     const speechText = `The previous session has completed. Do you want to start ${newSession} session now?`;
     return handlerInput.responseBuilder
         .speak(speechText)
-        .getResponse()
+        .getResponse();
   }
 };
 const StartSessionIntentHandler = {
@@ -87,7 +87,7 @@ const StartSessionIntentHandler = {
             const timerStatus = 'ON';
             if (timerStatus === 'ON') {
                 const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-                sessionAttributes['startedText'] = "Wow, it is started";
+                sessionAttributes['startTime'] = "Wow, it is started";
                 sessionAttributes['curSession'] = 'focus';
                 //sessionAttributes['lastTimerId'] = timerId;
 
