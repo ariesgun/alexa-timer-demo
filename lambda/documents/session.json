@@ -44,6 +44,9 @@
         }
     },
     "mainTemplate": {
+        "parameters": [
+            "sessionData"
+        ],
         "items": [
             {
                 "type": "Container",
