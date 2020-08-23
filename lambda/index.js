@@ -309,7 +309,13 @@ const PauseSessionIntentHandler = {
                 type: 'SetValue',
                 componentId: "MyContainer",
                 property: 'pause',
-                value: 'true',
+                value: "true",
+              },
+              {
+                type: 'SetValue',
+                componentId: "MyContainer",
+                property: 'seconds',
+                value: "59",
               },
               {
                 type: 'Idle',
