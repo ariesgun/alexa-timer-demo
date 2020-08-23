@@ -101,7 +101,12 @@ const StartSessionIntentHandler = {
                         type: 'Alexa.Presentation.APL.RenderDocument',
                         token: "sessionToken",
                         document: main,
-                        datasources: {}
+                        datasources: {
+                            sessionData: {
+                                title: "FOCUS",
+                                session: "focus"
+                            }
+                        }
                     })
                     .addDirective({
                         type: 'Alexa.Presentation.APL.ExecuteCommands',
