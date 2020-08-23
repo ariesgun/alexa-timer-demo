@@ -52,17 +52,13 @@
           {
             "name": "seconds",
             "value": 0
-          },
-          {
-            "name": "pause",
-            "value": "false"
           }
         ],
         "height": "100vh",
         "width": "100vw",
         "handleTick": [
           {
-            "when": "${(seconds > 0 || minutes > 0) && pause != 'true'}",
+            "when": "${(seconds > 0 || minutes > 0) && sessionData.pause != 'true'}",
             "minimumDelay": 1000,
             "commands": [
               {
@@ -95,7 +91,7 @@
                 "progress": "${progress}",
                 "handleTick": [
                   {
-                    "when": "${pause != 'true'}",
+                    "when": "${sessionData.pause != 'true'}",
                     "minimumDelay": 100,
                     "commands": [
                       {
