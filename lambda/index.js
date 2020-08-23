@@ -345,33 +345,6 @@ const PauseSessionIntentHandler = {
 
     return handlerInput.responseBuilder
       .speak(speakOutput)
-      .addDirective({
-        type: 'Alexa.Presentation.APL.ExecuteCommands',
-        token: 'sessionToken',
-        commands: [
-          {
-            type: 'Sequential',
-            commands: [
-              {
-                type: 'SetValue',
-                componentId: "MyContainer",
-                property: 'pause',
-                value: "true",
-              },
-              {
-                type: 'SetValue',
-                componentId: "MyContainer",
-                property: 'seconds',
-                value: "59",
-              },
-              {
-                type: 'Idle',
-                delay: '20000',
-              },
-            ],
-          },
-        ],
-      })
       .getResponse();
   },
 };
