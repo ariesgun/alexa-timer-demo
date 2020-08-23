@@ -35,7 +35,7 @@ function renderSessionAPLDocument(attributesManager) {
     
     const DURATION_DICT = {
         "focus": {
-            title: focus,
+            title: "focus",
             duration: 25
         },
         "short-break": {
@@ -44,7 +44,7 @@ function renderSessionAPLDocument(attributesManager) {
         },
         "long-break": {
             title: "break",
-            duration 10
+            duration: 10
         }
     }
     
