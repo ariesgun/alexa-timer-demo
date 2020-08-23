@@ -226,18 +226,59 @@ const AmazonYesHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.YesIntent';
     },
     handle(handlerInput) {
-        
         const {requestEnvelope, responseBuilder} = handlerInput;
         const {intent} = requestEnvelope.request;
         
-        console.log('confirmed or not');
-        console.log(intent);
-    
-        const speakOutput = 'Hello World Yes!';
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         
+        sessionAttributes['curSession'] = 'break';
+        const speakOutput = `${sessionAttributes['curSession']} session starts from now.`;
         return handlerInput.responseBuilder
             .speak(speakOutput)
-            .reprompt('add a reprompt if you want to keep the session open for the user to respond')
+            .addDirective({
+                type: 'Alexa.Presentation.APL.RenderDocument',
+                token: "sessionToken",
+                document: main,
+                datasources: {
+                    sessionData: {
+                        title: "FOCUS",
+                        session: sessionAttributes['curSession'],
+                        duration: 25
+                        
+                    }
+                }
+            })
+            .addDirective({
+                type: 'Alexa.Presentation.APL.ExecuteCommands',
+                token: 'sessionToken',
+                commands: [
+                    {
+                        type: "Parallel",
+                        commands: [
+                            {
+                                type: "Sequential",
+                                commands: [
+                                    {
+                                        type: "Idle",
+                                        delay: "60000"
+                                    },
+                                    {
+                                        type: "Idle",
+                                        delay: "60000"
+                                    },
+                                    {
+                                        type: "SendEvent",
+                                        arguments: [
+                                          "timeout clicked the button 2"
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            })
+            // .reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
     }
 };
