@@ -241,7 +241,7 @@ const AmazonYesHandler = {
                 document: main,
                 datasources: {
                     sessionData: {
-                        title: "sessionAttributes['curSession']",
+                        title: sessionAttributes['curSession'],
                         session: sessionAttributes['curSession'],
                         duration: 25
                         
