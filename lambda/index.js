@@ -53,6 +53,8 @@ function renderSessionAPLDocument(attributesManager, responseBuilder) {
         attributesManager['curSession'] = 'break';
     } else if (curSession === 'break') {
         attributesManager['curSession'] = 'focus';
+    } else {
+        attributesManager['curSession'] = 'focus';
     }
     
     const DURATION_MS = DURATION_DICT[attributesManager['curSession']].duration * 60000;
@@ -151,15 +153,14 @@ const StartSessionIntentHandler = {
             const timerStatus = 'ON';
             if (timerStatus === 'ON') {
                 const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-                sessionAttributes['startTime'] = "Wow, it is started";
-                sessionAttributes['curSession'] = 'focus';
+                sessionAttributes['curSession'] = 'init';
                 //sessionAttributes['lastTimerId'] = timerId;
 
                 handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
 
+                renderSessionAPLDocument(attributesManager, handlerInput.responseBuilder);
+                
                 const speakOutput = `${sessionAttributes['curSession']} session starts from now.`;
-                const DURATION = 3;
-                const DURATION_MS = DURATION * 60000;
                 return handlerInput.responseBuilder
                     .speak(speakOutput)
                     .addDirective({
