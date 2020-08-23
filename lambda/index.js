@@ -122,11 +122,7 @@ const StartSessionIntentHandler = {
                                         commands: [
                                             {
                                                 type: "Idle",
-                                                delay: "60000"
-                                            },
-                                            {
-                                                type: "Idle",
-                                                delay: "60000"
+                                                delay: "${duration * 60000}"
                                             },
                                             {
                                                 type: "SendEvent",
