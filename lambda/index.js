@@ -170,7 +170,7 @@ function renderPausedSessionAPLDocument(attributesManager, responseBuilder) {
           minutes: attributesManager['minutes'],
           seconds: attributesManager['seconds'],
           pause: 'true',
-          progress: 0
+          progress: attributesManager['progress']
         },
       },
     })
