@@ -38,7 +38,7 @@ function renderSessionAPLDocument(attributesManager, responseBuilder) {
             title: "focus",
             duration: 2
         },
-        "short-break": {
+        "break": {
             title: "break",
             duration: 2
         },
