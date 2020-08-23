@@ -145,6 +145,11 @@ function renderNewSessionAPLDocument(attributesManager, responseBuilder) {
 
 function renderPausedSessionAPLDocument(attributesManager, responseBuilder) {
     
+    const diff = moment().diff(attributesManager['startTime'], 'seconds');
+    
+    attributesManager['minutes'] = ;
+    attributesManager['seconds'] = ;
+    
     responseBuilder
     .addDirective({
       type: 'Alexa.Presentation.APL.RenderDocument',
@@ -332,9 +337,9 @@ const PauseSessionIntentHandler = {
   },
   handle(handlerInput) {
     const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-    const diff = moment().diff(sessionAttributes['startTime'], 'seconds');
-    sessionAttributes['curTime'] = diff;
-
+    
+    renderPausedSessionAPLDocument(sessionAttributes, handlerInput.responseBuilder);
+    
     const speakOutput =
       'The session has been paused. To resume the session, you can say resume session.';
 
