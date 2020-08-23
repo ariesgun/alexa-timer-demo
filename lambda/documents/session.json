@@ -48,11 +48,11 @@
           },
           {
             "name": "minutes",
-            "value": "${sessionData.duration}"
+            "value": "${sessionData.minutes}"
           },
           {
             "name": "seconds",
-            "value": 0
+            "value": "${sessionData.seconds}"
           }
         ],
         "height": "100vh",
