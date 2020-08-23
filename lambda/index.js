@@ -284,27 +284,6 @@ const AmazonYesHandler = {
             .getResponse();
     }
 };
-const AmazonNoHandler = {
-    canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.NoIntent';
-    },
-    handle(handlerInput) {
-        
-        const {requestEnvelope, responseBuilder} = handlerInput;
-        const {intent} = requestEnvelope.request;
-        
-        console.log('confirmed or not');
-        console.log(intent);
-    
-        const speakOutput = 'Hello World No!';
-        
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            .reprompt('add a reprompt if you want to keep the session open for the user to respond')
-            .getResponse();
-    }
-};
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -323,7 +302,8 @@ const CancelAndStopIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && (Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.CancelIntent'
-                || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
+                || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent'
+                || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.NoIntent');
     },
     handle(handlerInput) {
         const speakOutput = 'Goodbye!';
@@ -390,7 +370,6 @@ exports.handler = Alexa.SkillBuilders.custom()
         StopSessionIntentHandler,
         PauseSessionIntentHandler,
         AmazonYesHandler,
-        AmazonNoHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
