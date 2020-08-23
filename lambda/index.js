@@ -104,7 +104,9 @@ const StartSessionIntentHandler = {
                         datasources: {
                             sessionData: {
                                 title: "FOCUS",
-                                session: "focus"
+                                session: "focus",
+                                duration: 25
+                                
                             }
                         }
                     })
