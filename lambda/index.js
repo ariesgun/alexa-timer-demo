@@ -106,7 +106,7 @@ const StartSessionIntentHandler = {
                             sessionData: {
                                 title: "FOCUS",
                                 session: "focus",
-                                duration: 3
+                                duration: DURATION
                                 
                             }
                         }
