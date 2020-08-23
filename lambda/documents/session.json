@@ -119,7 +119,7 @@
                                                 "when": "${progress < 1508}",
                                                 "type": "SetValue",
                                                 "property": "progress",
-                                                "value": "${progress + (150.8 / Math.floor(60 * sessionData.duration))}"
+                                                "value": "${progress + (1508 / Math.floor(600 * sessionData.duration))}"
                                             }
                                         ]
                                     }
