@@ -59,6 +59,7 @@ const SessionFinishedIntentHandler = {
     const speechText = `The previous session has completed. Do you want to start ${newSession} session now?`;
     return handlerInput.responseBuilder
         .speak(speechText)
+        .reprompt(speechText)
         .getResponse();
   }
 };
