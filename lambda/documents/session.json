@@ -70,7 +70,7 @@
                             {
                                 "type": "SetValue",
                                 "property": "minutes",
-                                "value": "${Math.floor(elapsedTime / 60000) >= 2 ? 0 : 1 - Math.floor(elapsedTime / 60000)}"
+                                "value": "${Math.floor(elapsedTime / 60000) >= sessionData.duration ? 0 : sessionData.duration - 1 - Math.floor(elapsedTime / 60000)}"
                             },
                             {
                                 "type": "SetValue",
