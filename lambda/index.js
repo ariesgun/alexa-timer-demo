@@ -93,7 +93,7 @@ const StartSessionIntentHandler = {
 
                 handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
 
-                const speakOutput = 'Focus session starts from now.';
+                const speakOutput = `${sessionAttributes['curSession']} session starts from now.`;
                 return handlerInput.responseBuilder
                     .speak(speakOutput)
                     .addDirective({
