@@ -37,12 +37,6 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
-        const {requestEnvelope, responseBuilder} = handlerInput;
-        const {intent} = requestEnvelope.request;
-        
-        console.log('confirmed or not');
-        console.log(intent.confirmationStatus);
-        
         const speakOutput = 'Welcome, you can say Hello or Help. Which would you like to try?';
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -58,6 +52,12 @@ const SessionFinishedIntentHandler = {
   handle(handlerInput) {
     // Take argument sent from the button to speak back to the user
     const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+    
+    const {requestEnvelope, responseBuilder} = handlerInput;
+    const {intent} = requestEnvelope.request;
+    
+    console.log('confirmed or not');
+    console.log(intent.confirmationStatus);
     
     console.log('Soure id ' + handlerInput.requestEnvelope.request.source.id)
     const newSession = sessionAttributes['curSession'] === 'focus' ? 'break' : 'focus';
