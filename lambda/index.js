@@ -56,7 +56,7 @@ const SessionFinishedIntentHandler = {
     console.log('Soure id ' + handlerInput.requestEnvelope.request.source.id)
     const newSession = sessionAttributes['curSession'] === 'focus' ? 'break' : 'focus';
     
-    const speechText = "The previous session has completed. Do you want to start ${newSession} session now?";
+    const speechText = `The previous session has completed. Do you want to start ${newSession} session now?`;
     return handlerInput.responseBuilder
         .speak(speechText)
         .getResponse()
