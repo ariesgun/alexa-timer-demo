@@ -53,12 +53,6 @@ const SessionFinishedIntentHandler = {
     // Take argument sent from the button to speak back to the user
     const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
     
-    const {requestEnvelope, responseBuilder} = handlerInput;
-    const {intent} = requestEnvelope.request;
-    
-    console.log('confirmed or not');
-    console.log(intent.confirmationStatus);
-    
     console.log('Soure id ' + handlerInput.requestEnvelope.request.source.id)
     const newSession = sessionAttributes['curSession'] === 'focus' ? 'break' : 'focus';
     
