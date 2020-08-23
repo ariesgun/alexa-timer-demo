@@ -231,6 +231,9 @@ const AmazonYesHandler = {
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         
         sessionAttributes['curSession'] = 'break';
+        const DURATION = 3;
+        const DURATION_MS = DURATION * 60000;
+        
         const speakOutput = `${sessionAttributes['curSession']} session starts from now.`;
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -242,7 +245,7 @@ const AmazonYesHandler = {
                     sessionData: {
                         title: sessionAttributes['curSession'],
                         session: sessionAttributes['curSession'],
-                        duration: 25
+                        duration: DURATION
                         
                     }
                 }
