@@ -48,6 +48,14 @@ function renderSessionAPLDocument(attributesManager) {
         }
     }
     
+    const curSession = attributesManager['curSession'];
+    if (curSession === 'focus') {
+        attributesManager['curSession'] = 'break';
+    } else if (curSession === 'break') {
+        attributesManager['curSession'] = 'focus';
+    }
+    
+    
 }
 
 
