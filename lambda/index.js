@@ -125,11 +125,6 @@ function renderSessionAPLDocument(attributesManager, responseBuilder) {
           type: 'Sequential',
           commands: [
             {
-              type: "SetValue",
-              property: "pause",
-              value: "true"
-            },
-            {
               type: 'Idle',
               delay: attributesManager['durationMS'],
             },
