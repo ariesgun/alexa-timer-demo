@@ -149,6 +149,7 @@ function renderPausedSessionAPLDocument(attributesManager, responseBuilder) {
     
     attributesManager['minutes'] = diff / 60;
     attributesManager['seconds'] = diff % 60;
+    sessionAttributes['durationMS'] = DURATION_DICT[newSession].duration * 60000;
     
     responseBuilder
     .addDirective({
