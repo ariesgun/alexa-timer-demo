@@ -258,16 +258,16 @@ const AmazonYesHandler = {
                                 type: "Sequential",
                                 commands: [
                                     {
-                                        type: "Idle",
-                                        delay: "60000"
-                                    },
-                                    {
-                                        type: "Idle",
-                                        delay: "60000"
-                                    },
-                                    {
-                                        type: "SendEvent"
-                                    }
+                                                type: "Idle",
+                                                delay: `${DURATION_MS}`
+                                            },
+                                            {
+                                                type: "Idle",
+                                                delay: "2000"
+                                            },
+                                            {
+                                                type: "SendEvent"
+                                            }
                                 ]
                             }
                         ]
