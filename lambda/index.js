@@ -164,6 +164,7 @@ const StartSessionIntentHandler = {
                 return handlerInput.responseBuilder
                     .speak(speakOutput)
                     .getResponse();
+                    
             } else {
                 throw { statusCode: 308, message: 'Timer did not start' };
             }
