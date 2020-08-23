@@ -146,12 +146,16 @@ function renderNewSessionAPLDocument(attributesManager, responseBuilder) {
 
 function renderPausedSessionAPLDocument(attributesManager, responseBuilder) {
     
+    console.log(attributesManager);
+    
     const diff = moment().diff(attributesManager['startTime'], 'seconds');
     
     attributesManager['minutes'] = diff / 60;
     attributesManager['seconds'] = diff % 60;
     attributesManager['durationMS'] -= (diff * 1000);
     attributesManager['progress'] = (1508 / attributesManager['duration'] / 60) * diff;
+    
+    console.log(attributesManager);
     
     responseBuilder
     .addDirective({
