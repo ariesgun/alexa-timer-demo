@@ -37,6 +37,11 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     handle(handlerInput) {
+        const {requestEnvelope, responseBuilder} = handlerInput;
+        const {intent} = requestEnvelope.request;
+        
+        console.log('confirmed or not');
+        console.log(intent.confirmationStatus);
         const speakOutput = 'Welcome, you can say Hello or Help. Which would you like to try?';
         return handlerInput.responseBuilder
             .speak(speakOutput)
