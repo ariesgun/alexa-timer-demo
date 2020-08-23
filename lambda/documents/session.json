@@ -1,162 +1,160 @@
 {
-    "type": "APL",
-    "version": "1.4",
-    "graphics": {
-        "ProgressRadial": {
-            "type": "AVG",
-            "version": "1.0",
-            "parameters": [
-                "progress"
-            ],
-            "width": 480,
-            "height": 480,
-            "scaleTypeWidth": "stretch",
-            "items": [
-                {
-                    "type": "group",
-                    "description": "Progress Radial Group",
-                    "items": [
-                        {
-                            "type": "path",
-                            "description": "Progress Radial background",
-                            "pathData": "M240,0 a240,240,0,1,1,0,480 a240,240,0,1,1,0,-480",
-                            "stroke": "#223",
-                            "strokeDashArray": [
-                                1508,
-                                1508
-                            ],
-                            "strokeWidth": 50
-                        },
-                        {
-                            "type": "path",
-                            "description": "Progress Radial",
-                            "pathData": "M240,0 a240,240,0,1,1,0,480 a240,240,0,1,1,0,-480",
-                            "stroke": "#ADFF2F",
-                            "strokeDashArray": [
-                                "${progress}",
-                                1508
-                            ],
-                            "strokeWidth": 50
-                        }
-                    ]
-                }
-            ]
+  "type": "APL",
+  "version": "1.4",
+  "graphics": {
+    "ProgressRadial": {
+      "type": "AVG",
+      "version": "1.0",
+      "parameters": ["progress"],
+      "width": 480,
+      "height": 480,
+      "scaleTypeWidth": "stretch",
+      "items": [
+        {
+          "type": "group",
+          "description": "Progress Radial Group",
+          "items": [
+            {
+              "type": "path",
+              "description": "Progress Radial background",
+              "pathData": "M240,0 a240,240,0,1,1,0,480 a240,240,0,1,1,0,-480",
+              "stroke": "#223",
+              "strokeDashArray": [1508, 1508],
+              "strokeWidth": 50
+            },
+            {
+              "type": "path",
+              "description": "Progress Radial",
+              "pathData": "M240,0 a240,240,0,1,1,0,480 a240,240,0,1,1,0,-480",
+              "stroke": "#ADFF2F",
+              "strokeDashArray": ["${progress}", 1508],
+              "strokeWidth": 50
+            }
+          ]
         }
-    },
-    "mainTemplate": {
-        "parameters": [
-            "sessionData"
+      ]
+    }
+  },
+  "mainTemplate": {
+    "parameters": ["sessionData"],
+    "items": [
+      {
+        "type": "Container",
+        "bind": [
+          {
+            "name": "totalMinutes",
+            "value": "${sessionData.duration}"
+          },
+          {
+            "name": "minutes",
+            "value": "${sessionData.duration}"
+          },
+          {
+            "name": "seconds",
+            "value": 0
+          },
+          {
+            "name": "pause",
+            "value": "false"
+          }
+        ],
+        "height": "100vh",
+        "width": "100vw",
+        "handleTick": [
+          {
+            "when": "${(seconds > 0 || minutes > 0) && pause != 'false'}",
+            "minimumDelay": 1000,
+            "commands": [
+              {
+                "type": "SetValue",
+                "property": "minutes",
+                "value": "${Math.floor(elapsedTime / 60000) >= sessionData.duration ? 0 : sessionData.duration - 1 - Math.floor(elapsedTime / 60000)}"
+              },
+              {
+                "type": "SetValue",
+                "property": "seconds",
+                "value": "${((Math.floor(elapsedTime / 1000) % 60) == 0 ? 59 : 59 - Math.floor(elapsedTime / 1000) % 60)}"
+              }
+            ]
+          },
+          {
+            "when": "${elapsedTime > (sessionData.duration * 60000)}",
+            "minimumDelay": 100,
+            "commands": [
+              {
+                "type": "SetValue",
+                "property": "minutes",
+                "value": "00"
+              },
+              {
+                "type": "SetValue",
+                "property": "seconds",
+                "value": "00"
+              }
+            ]
+          }
         ],
         "items": [
-            {
-                "type": "Container",
+          {
+            "type": "Container",
+            "position": "absolute",
+            "items": [
+              {
+                "type": "VectorGraphic",
+                "source": "ProgressRadial",
                 "bind": [
-                    {
-                        "name": "minutes",
-                        "value": "${sessionData.duration}"
-                    },
-                    {
-                        "name": "seconds",
-                        "value": 0
-                    }
+                  {
+                    "name": "progress",
+                    "value": 0
+                  }
                 ],
-                "height": "100vh",
-                "width": "100vw",
+                "progress": "${progress}",
                 "handleTick": [
-                    {
-                        "when": "${seconds > 0 || minutes > 0}",
-                        "minimumDelay": 1000,
-                        "commands": [
-                            {
-                                "type": "SetValue",
-                                "property": "minutes",
-                                "value": "${Math.floor(elapsedTime / 60000) >= sessionData.duration ? 0 : sessionData.duration - 1 - Math.floor(elapsedTime / 60000)}"
-                            },
-                            {
-                                "type": "SetValue",
-                                "property": "seconds",
-                                "value": "${((Math.floor(elapsedTime / 1000) % 60) == 0 ? 59 : 59 - Math.floor(elapsedTime / 1000) % 60)}"
-                            }
-                        ]
-                    },
-                    {
-                        "when": "${elapsedTime > (sessionData.duration * 60000)}",
-                        "minimumDelay": 100,
-                        "commands": [
-                            {
-                                "type": "SetValue",
-                                "property": "minutes",
-                                "value": "00"
-                            },
-                            {
-                                "type": "SetValue",
-                                "property": "seconds",
-                                "value": "00"
-                            }
-                        ]
-                    }
-                ],
-                "items": [
-                    {
-                        "type": "Container",
-                        "position": "absolute",
-                        "items": [
-                            {
-                                "type": "VectorGraphic",
-                                "source": "ProgressRadial",
-                                "bind": [
-                                    {
-                                        "name": "progress",
-                                        "value": 0
-                                    }
-                                ],
-                                "progress": "${progress}",
-                                "handleTick": [
-                                    {
-                                        "minimumDelay": 100,
-                                        "commands": [
-                                            {
-                                                "when": "${progress < 1508}",
-                                                "type": "SetValue",
-                                                "property": "progress",
-                                                "value": "${progress + (1508 / Math.floor(600 * sessionData.duration))}"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    },
-                    {
-                        "type": "Frame",
-                        "spacing": "@spacingMedium",
-                        "items": [
-                            {
-                                "type": "Text",
-                                "fontSize": "52dp",
-                                "text": "${minutes < 10 ? '0' : ''}${minutes} : ${seconds < 10 ? '0' : ''}${seconds}",
-                                "width": "100%",
-                                "textAlign": "center",
-                                "paddingTop": "240dp"
-                            }
-                        ]
-                    },
-                    {
-                        "type": "Frame",
-                        "items": [
-                            {
-                                "type": "Text",
-                                "fontSize": "24dp",
-                                "text": "${sessionData.duration}-minute ${sessionData.title} session",
-                                "width": "100%",
-                                "textAlign": "center",
-                                "paddingTop": "0dp",
-                                "paddingBottom": "@spacingMedium"
-                            }
-                        ]
-                    }
+                  {
+                    "minimumDelay": 100,
+                    "commands": [
+                      {
+                        "when": "${progress < 1508}",
+                        "type": "SetValue",
+                        "property": "progress",
+                        "value": "${progress + (1508 / Math.floor(600 * sessionData.duration))}"
+                      }
+                    ]
+                  }
                 ]
-            }
+              }
+            ]
+          },
+          {
+            "type": "Frame",
+            "spacing": "@spacingMedium",
+            "items": [
+              {
+                "type": "Text",
+                "fontSize": "52dp",
+                "text": "${minutes < 10 ? '0' : ''}${minutes} : ${seconds < 10 ? '0' : ''}${seconds}",
+                "width": "100%",
+                "textAlign": "center",
+                "paddingTop": "240dp"
+              }
+            ]
+          },
+          {
+            "type": "Frame",
+            "items": [
+              {
+                "type": "Text",
+                "fontSize": "24dp",
+                "text": "${sessionData.duration}-minute ${sessionData.title} session",
+                "width": "100%",
+                "textAlign": "center",
+                "paddingTop": "0dp",
+                "paddingBottom": "@spacingMedium"
+              }
+            ]
+          }
         ]
-    }
+      }
+    ]
+  }
 }

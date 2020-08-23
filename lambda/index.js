@@ -62,16 +62,6 @@ function getNextSession(currentSession, counter = 0) {
 }
 
 function updateSessionAttributes(newSession, sessionAttributes) {
-  if (newSession === 'focus') {
-    sessionAttributes['counter'] += 1;
-  } else if (newSession === 'long-break') {
-    sessionAttributes['counter'] = 0;
-  }
-
-  attributesManager['curSession'] = nextSession;
-}
-
-function renderSessionAPLDocument(attributesManager, responseBuilder) {
   const DURATION_DICT = {
     focus: {
       title: 'focus',
@@ -87,6 +77,20 @@ function renderSessionAPLDocument(attributesManager, responseBuilder) {
     },
   };
 
+  if (newSession === 'focus') {
+    sessionAttributes['counter'] += 1;
+  } else if (newSession === 'long-break') {
+    sessionAttributes['counter'] = 0;
+  }
+
+  sessionAttributes['curSession'] = newSession;
+  sessionAttributes['title'] = DURATION_DICT[newSession].title;
+  sessionAttributes['duration'] = DURATION_DICT[newSession].duration;
+  sessionAttributes['durationMS'] = DURATION_DICT[newSession].duration * 60000;
+  sessionAttributes['startTime'] = moment();
+}
+
+function renderSessionAPLDocument(attributesManager, responseBuilder) {
   console.log(
     'Current session now before is ' + attributesManager['curSession']
   );
@@ -96,9 +100,6 @@ function renderSessionAPLDocument(attributesManager, responseBuilder) {
     'Current session now after is ' + attributesManager['curSession']
   );
 
-  const DURATION_MS = (attributesManager['curSession'] = nextSession);
-  DURATION_DICT[attributesManager['curSession']].duration * 60000;
-
   responseBuilder
     .addDirective({
       type: 'Alexa.Presentation.APL.RenderDocument',
@@ -106,8 +107,8 @@ function renderSessionAPLDocument(attributesManager, responseBuilder) {
       document: main,
       datasources: {
         sessionData: {
-          title: DURATION_DICT[attributesManager['curSession']].title,
-          duration: DURATION_DICT[attributesManager['curSession']].duration,
+          title: attributesManager['title'],
+          duration: attributesManager['duration'],
         },
       },
     })
@@ -120,7 +121,7 @@ function renderSessionAPLDocument(attributesManager, responseBuilder) {
           commands: [
             {
               type: 'Idle',
-              delay: `${DURATION_MS}`,
+              delay: attributesManager['durationMS'],
             },
             {
               type: 'Idle',
@@ -200,7 +201,9 @@ const StartSessionIntentHandler = {
       if (timerStatus === 'ON') {
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         sessionAttributes['curSession'] = 'init';
+        sessionAttributes['duration'] = 0;
         sessionAttributes['counter'] = 0;
+        sessionAttributes['startTime'] = moment();
         //sessionAttributes['lastTimerId'] = timerId;
 
         handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
@@ -280,11 +283,35 @@ const PauseSessionIntentHandler = {
   },
   handle(handlerInput) {
     const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+    const diff = moment().diff(sessionAttributes['startTime'], 'seconds');
+    sessionAttributes['curTime'] = diff;
 
     const speakOutput =
       'The session has been paused. To resume the session, you can say resume session.';
 
-    return handlerInput.responseBuilder.speak(speakOutput).getResponse();
+    return handlerInput.responseBuilder
+      .speak(speakOutput)
+      .addDirective({
+        type: 'Alexa.Presentation.APL.ExecuteCommands',
+        token: 'sessionToken',
+        commands: [
+          {
+            type: 'Sequential',
+            commands: [
+              {
+                type: 'SetValue',
+                property: 'pause',
+                value: 'true',
+              },
+              {
+                type: 'Idle',
+                delay: '20000',
+              },
+            ],
+          },
+        ],
+      })
+      .getResponse();
   },
 };
 const AmazonYesHandler = {
