@@ -213,6 +213,48 @@ const PauseSessionIntentHandler = {
             .getResponse();
     }
 };
+const AmazonYesHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'YesIntent';
+    },
+    handle(handlerInput) {
+        
+        const {requestEnvelope, responseBuilder} = handlerInput;
+        const {intent} = requestEnvelope.request;
+        
+        console.log('confirmed or not');
+        console.log(intent);
+    
+        const speakOutput = 'Hello World Yes!';
+        
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt('add a reprompt if you want to keep the session open for the user to respond')
+            .getResponse();
+    }
+};
+const AmazonNoHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'NoIntent';
+    },
+    handle(handlerInput) {
+        
+        const {requestEnvelope, responseBuilder} = handlerInput;
+        const {intent} = requestEnvelope.request;
+        
+        console.log('confirmed or not');
+        console.log(intent);
+    
+        const speakOutput = 'Hello World No!';
+        
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .reprompt('add a reprompt if you want to keep the session open for the user to respond')
+            .getResponse();
+    }
+};
 const HelpIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
