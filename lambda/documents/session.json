@@ -53,7 +53,7 @@
                 "bind": [
                     {
                         "name": "minutes",
-                        "value": ${sessionData.duration}
+                        "value": "${sessionData.duration}"
                     },
                     {
                         "name": "seconds",
