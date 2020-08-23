@@ -111,6 +111,8 @@ function renderSessionAPLDocument(attributesManager, responseBuilder) {
         sessionData: {
           title: attributesManager['title'],
           duration: attributesManager['duration'],
+          minutes: attributesManager['duration'],
+          seconds: 0,
           pause: 'false'
         },
       },
