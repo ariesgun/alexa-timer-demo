@@ -302,7 +302,6 @@ const PauseSessionIntentHandler = {
             commands: [
               {
                 type: 'SetValue',
-                
                 property: 'pause',
                 value: 'true',
               },
