@@ -95,6 +95,7 @@ const StartSessionIntentHandler = {
                 handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
 
                 const speakOutput = `${sessionAttributes['curSession']} session starts from now.`;
+                const DURATION = 3;
                 return handlerInput.responseBuilder
                     .speak(speakOutput)
                     .addDirective({
@@ -122,7 +123,7 @@ const StartSessionIntentHandler = {
                                         commands: [
                                             {
                                                 type: "Idle",
-                                                delay: `${duration} * 60000`
+                                                delay: `${DURATION} * 60000`
                                             },
                                             {
                                                 type: "SendEvent",
