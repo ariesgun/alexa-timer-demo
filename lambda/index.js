@@ -57,7 +57,7 @@ function renderSessionAPLDocument(attributesManager, responseBuilder) {
     } else {
         attributesManager['curSession'] = 'focus';
     }
-    console.log('Current session now after is ' + curSession);
+    console.log('Current session now after is ' + attributesManager['curSession']);
     const DURATION_MS = DURATION_DICT[attributesManager['curSession']].duration * 60000;
     
     responseBuilder.addDirective({
