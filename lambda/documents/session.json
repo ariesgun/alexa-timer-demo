@@ -86,7 +86,7 @@
                 "bind": [
                   {
                     "name": "progress",
-                    "value": 0
+                    "value": "${sessionData.progress}""
                   }
                 ],
                 "progress": "${progress}",
