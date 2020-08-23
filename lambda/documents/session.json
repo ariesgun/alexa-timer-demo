@@ -147,7 +147,7 @@
                             {
                                 "type": "Text",
                                 "fontSize": "24dp",
-                                "text": "${sessionData.duration}-minute session ${repeatCounter}",
+                                "text": "${sessionData.duration}-minute ${sessionData.title} session",
                                 "width": "100%",
                                 "textAlign": "center",
                                 "paddingTop": "0dp",
