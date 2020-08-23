@@ -31,7 +31,7 @@ function getAnnouncementTimer(handlerInput, duration) {
     };
 }
 
-function renderSessionAPLDocument(attributesManager) {
+function renderSessionAPLDocument(attributesManager, responseBuilder) {
     
     const DURATION_DICT = {
         "focus": {
@@ -55,6 +55,41 @@ function renderSessionAPLDocument(attributesManager) {
         attributesManager['curSession'] = 'focus';
     }
     
+    responseBuilder.addDirective({
+        type: 'Alexa.Presentation.APL.RenderDocument',
+        token: "sessionToken",
+        document: main,
+        datasources: {
+            sessionData: {
+                title: "FOCUS",
+                session: "focus",
+                duration: DURATION
+                
+            }
+        }
+    })
+    .addDirective({
+        type: 'Alexa.Presentation.APL.ExecuteCommands',
+        token: 'sessionToken',
+        commands: [
+            {
+                type: "Sequential",
+                commands: [
+                    {
+                        type: "Idle",
+                        delay: `${DURATION_MS}`
+                    },
+                    {
+                        type: "Idle",
+                        delay: "2000"
+                    },
+                    {
+                        type: "SendEvent"
+                    }
+                ]
+            }
+        ]
+    })
     
 }
 
