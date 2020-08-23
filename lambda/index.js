@@ -254,9 +254,12 @@ const AmazonYesHandler = {
         
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         
-        sessionAttributes['curSession'] = sessionAttributes['curSession'] === 'focus' ? 'break' : 'focus';
-        const DURATION = 3;
-        const DURATION_MS = DURATION * 60000;
+        renderSessionAPLDocument(sessionAttributes, handlerInput.responseBuilder);
+        
+        const speakOutput = `${sessionAttributes['curSession']} session starts from now.`;
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            .getResponse();
         
         const speakOutput = `${sessionAttributes['curSession']} session starts from now.`;
         return handlerInput.responseBuilder
