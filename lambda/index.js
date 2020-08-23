@@ -63,8 +63,8 @@ function renderSessionAPLDocument(attributesManager, responseBuilder) {
         document: main,
         datasources: {
             sessionData: {
-                session: DURATION_DICT[''].title,
-                duration: DURATION_DICT[''].duration
+                session: DURATION_DICT[attributesManager['curSession']].title,
+                duration: DURATION_DICT[attributesManager['curSession']].duration
                 
             }
         }
