@@ -230,7 +230,7 @@ const AmazonYesHandler = {
         
         const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
         
-        sessionAttributes['curSession'] = 'break';
+        sessionAttributes['curSession'] = sessionAttributes['curSession'] === 'focus' ? 'break' : 'focus';
         const DURATION = 3;
         const DURATION_MS = DURATION * 60000;
         
