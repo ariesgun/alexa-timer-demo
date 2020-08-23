@@ -151,6 +151,7 @@ function renderPausedSessionAPLDocument(attributesManager, responseBuilder) {
     attributesManager['minutes'] = diff / 60;
     attributesManager['seconds'] = diff % 60;
     attributesManager['durationMS'] -= (diff * 1000);
+    attributesManager['progress'] = (1508 / attributesManager['duration'] / 60) * diff;
     
     responseBuilder
     .addDirective({
