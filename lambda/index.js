@@ -158,7 +158,7 @@ const StartSessionIntentHandler = {
 
                 handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
 
-                renderSessionAPLDocument(attributesManager, handlerInput.responseBuilder);
+                renderSessionAPLDocument(handlerInput.attributesManager, handlerInput.responseBuilder);
                 
                 const speakOutput = `${sessionAttributes['curSession']} session starts from now.`;
                 return handlerInput.responseBuilder
