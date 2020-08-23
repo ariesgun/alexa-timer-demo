@@ -76,22 +76,6 @@
                 "value": "${((Math.floor(elapsedTime / 1000) % 60) == 0 ? 59 : 59 - Math.floor(elapsedTime / 1000) % 60)}"
               }
             ]
-          },
-          {
-            "when": "${elapsedTime > (sessionData.duration * 60000)}",
-            "minimumDelay": 100,
-            "commands": [
-              {
-                "type": "SetValue",
-                "property": "minutes",
-                "value": "00"
-              },
-              {
-                "type": "SetValue",
-                "property": "seconds",
-                "value": "00"
-              }
-            ]
           }
         ],
         "items": [
@@ -111,6 +95,7 @@
                 "progress": "${progress}",
                 "handleTick": [
                   {
+                    "when": "${pause != 'true'}",
                     "minimumDelay": 100,
                     "commands": [
                       {
