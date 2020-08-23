@@ -36,11 +36,11 @@ function renderSessionAPLDocument(attributesManager, responseBuilder) {
     const DURATION_DICT = {
         "focus": {
             title: "focus",
-            duration: 25
+            duration: 2
         },
         "short-break": {
             title: "break",
-            duration: 5
+            duration: 2
         },
         "long-break": {
             title: "break",
@@ -49,6 +49,7 @@ function renderSessionAPLDocument(attributesManager, responseBuilder) {
     }
     
     const curSession = attributesManager['curSession'];
+    console.log('Current session now before is ' + curSession);
     if (curSession === 'focus') {
         attributesManager['curSession'] = 'break';
     } else if (curSession === 'break') {
@@ -56,7 +57,7 @@ function renderSessionAPLDocument(attributesManager, responseBuilder) {
     } else {
         attributesManager['curSession'] = 'focus';
     }
-    
+    console.log('Current session now after is ' + curSession);
     const DURATION_MS = DURATION_DICT[attributesManager['curSession']].duration * 60000;
     
     responseBuilder.addDirective({
