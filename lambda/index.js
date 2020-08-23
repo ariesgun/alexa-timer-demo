@@ -2,6 +2,7 @@
 // Please visit https://alexa.design/cookbook for additional examples on implementing slots, dialog management,
 // session persistence, api calls, and more.
 const Alexa = require('ask-sdk-core');
+const moment = require('moment');
 
 const TIMERS_PERMISSION = 'alexa::alerts::timers:skill:readwrite';
 
@@ -230,11 +231,9 @@ const PauseSessionIntentHandler = {
     },
     handle(handlerInput) {
         
-        const {requestEnvelope, responseBuilder} = handlerInput;
-        const {intent} = requestEnvelope.request;
-        
-        console.log('confirmed or not');
-        console.log(intent);
+        const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+
+
     
         const speakOutput = 'The session has been paused. To resume the session, you can say resume session.';
         
