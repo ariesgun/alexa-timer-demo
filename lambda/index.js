@@ -44,7 +44,7 @@ const LaunchRequestHandler = {
             .getResponse();
     }
 };
-const SendEventIntentHandler = {
+const SessionFinishedIntentHandler = {
   canHandle(handlerInput) {
     // Check for SendEvent sent from the button
     return handlerInput.requestEnvelope.request.type === 'Alexa.Presentation.APL.UserEvent'
@@ -280,7 +280,7 @@ exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
         StartSessionIntentHandler,
-        SendEventIntentHandler,
+        SessionFinishedIntentHandler,
         StopSessionIntentHandler,
         PauseSessionIntentHandler,
         HelpIntentHandler,
