@@ -147,8 +147,8 @@ function renderPausedSessionAPLDocument(attributesManager, responseBuilder) {
     
     const diff = moment().diff(attributesManager['startTime'], 'seconds');
     
-    attributesManager['minutes'] = ;
-    attributesManager['seconds'] = ;
+    attributesManager['minutes'] = diff / 60;
+    attributesManager['seconds'] = diff % 60;
     
     responseBuilder
     .addDirective({
