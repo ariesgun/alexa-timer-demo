@@ -80,7 +80,7 @@
                         ]
                     },
                     {
-                        "when": "${elapsedTime > 120000}",
+                        "when": "${elapsedTime > (sessionData.duration * 60000)}",
                         "minimumDelay": 100,
                         "commands": [
                             {
