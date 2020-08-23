@@ -297,6 +297,8 @@ exports.handler = Alexa.SkillBuilders.custom()
         SessionFinishedIntentHandler,
         StopSessionIntentHandler,
         PauseSessionIntentHandler,
+        AmazonYesHandler,
+        AmazonNoHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
