@@ -31,6 +31,25 @@ function getAnnouncementTimer(handlerInput, duration) {
     };
 }
 
+function renderSessionAPLDocument(attributesManager) {
+    
+    const DURATION_DICT = {
+        "focus": {
+            title: focus,
+            duration: 25
+        },
+        "short-break": {
+            title: "break",
+            duration: 5
+        },
+        "long-break": {
+            title: "break",
+            duration 10
+        }
+    }
+    
+}
+
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
