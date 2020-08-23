@@ -236,11 +236,10 @@ const PauseSessionIntentHandler = {
         console.log('confirmed or not');
         console.log(intent);
     
-        const speakOutput = 'Hello World Pause!';
+        const speakOutput = 'The session has been paused. To resume the session, you can say resume session.';
         
         return handlerInput.responseBuilder
             .speak(speakOutput)
-            .reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
     }
 };
