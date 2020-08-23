@@ -198,10 +198,18 @@ const PauseSessionIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'PauseSessionIntent';
     },
     handle(handlerInput) {
+        
+        const {requestEnvelope, responseBuilder} = handlerInput;
+        const {intent} = requestEnvelope.request;
+        
+        console.log('confirmed or not');
+        console.log(intent);
+    
         const speakOutput = 'Hello World Pause!';
+        
         return handlerInput.responseBuilder
             .speak(speakOutput)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+            .reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
     }
 };
