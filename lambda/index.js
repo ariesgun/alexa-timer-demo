@@ -52,7 +52,7 @@ const SessionFinishedIntentHandler = {
   handle(handlerInput) {
     // Take argument sent from the button to speak back to the user
     console.log('Soure id ' + handlerInput.requestEnvelope.request.source.id)
-    const speechText = "An event has been triggered";
+    const speechText = "The previous session has completed. Do you want to start ${newSession} now?";
     return handlerInput.responseBuilder
         .speak(speechText)
         .getResponse()
