@@ -163,47 +163,6 @@ const StartSessionIntentHandler = {
                 const speakOutput = `${sessionAttributes['curSession']} session starts from now.`;
                 return handlerInput.responseBuilder
                     .speak(speakOutput)
-                    .addDirective({
-                        type: 'Alexa.Presentation.APL.RenderDocument',
-                        token: "sessionToken",
-                        document: main,
-                        datasources: {
-                            sessionData: {
-                                title: "FOCUS",
-                                session: "focus",
-                                duration: DURATION
-                                
-                            }
-                        }
-                    })
-                    .addDirective({
-                        type: 'Alexa.Presentation.APL.ExecuteCommands',
-                        token: 'sessionToken',
-                        commands: [
-                            {
-                                type: "Parallel",
-                                commands: [
-                                    {
-                                        type: "Sequential",
-                                        commands: [
-                                            {
-                                                type: "Idle",
-                                                delay: `${DURATION_MS}`
-                                            },
-                                            {
-                                                type: "Idle",
-                                                delay: "2000"
-                                            },
-                                            {
-                                                type: "SendEvent"
-                                            }
-                                        ]
-                                    }
-                                ]
-                            }
-                        ]
-                    })
-                    // .reprompt('add a reprompt if you want to keep the session open for the user to respond')
                     .getResponse();
             } else {
                 throw { statusCode: 308, message: 'Timer did not start' };
