@@ -56,6 +56,8 @@ function getNextSession(currentSession, counter = 0) {
     nextSession = 'break';
   } else if (currentSession === 'break') {
     nextSession = counter >= 3 ? 'long-break' : 'focus';
+  } else {
+      nextSession = 'focus';
   }
 
   return nextSession;
