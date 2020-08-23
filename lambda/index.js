@@ -54,7 +54,7 @@ const SessionFinishedIntentHandler = {
     console.log('Soure id ' + handlerInput.requestEnvelope.request.source.id)
     const newSession = 'break';
     
-    const speechText = "The previous session has completed. Do you want to start ${newSession} now?";
+    const speechText = "The previous session has completed. Do you want to start ${newSession} session now?";
     return handlerInput.responseBuilder
         .speak(speechText)
         .getResponse()
@@ -86,6 +86,7 @@ const StartSessionIntentHandler = {
             if (timerStatus === 'ON') {
                 const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
                 sessionAttributes['startedText'] = "Wow, it is started";
+                sessionAttributes['curSession'] = 'Focus';
                 //sessionAttributes['lastTimerId'] = timerId;
 
                 handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
@@ -129,7 +130,7 @@ const StartSessionIntentHandler = {
                             }
                         ]
                     })
-                    .reprompt('add a reprompt if you want to keep the session open for the user to respond')
+                    // .reprompt('add a reprompt if you want to keep the session open for the user to respond')
                     .getResponse();
             } else {
                 throw { statusCode: 308, message: 'Timer did not start' };
