@@ -113,13 +113,13 @@
                                 "progress": "${progress}",
                                 "handleTick": [
                                     {
-                                        "minimumDelay": 1000,
+                                        "minimumDelay": 100,
                                         "commands": [
                                             {
                                                 "when": "${progress < 1508}",
                                                 "type": "SetValue",
                                                 "property": "progress",
-                                                "value": "${progress + (1508 / Math.floor(60 * sessionData.duration))}"
+                                                "value": "${progress + (150.8 / Math.floor(60 * sessionData.duration))}"
                                             }
                                         ]
                                     }
