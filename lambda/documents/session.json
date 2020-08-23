@@ -53,13 +53,17 @@
           {
             "name": "seconds",
             "value": 0
+          },
+          {
+            "name": "pause",
+            "value": "false"
           }
         ],
         "height": "100vh",
         "width": "100vw",
         "handleTick": [
           {
-            "when": "${(seconds > 0 || minutes > 0) && sessionData.pause != 'true'}",
+            "when": "${(seconds > 0 || minutes > 0) && .pause != 'true'}",
             "minimumDelay": 1000,
             "commands": [
               {
