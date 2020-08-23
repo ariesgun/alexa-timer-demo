@@ -116,7 +116,8 @@ function renderNewSessionAPLDocument(attributesManager, responseBuilder) {
           duration: attributesManager['duration'],
           minutes: attributesManager['minutes'],
           seconds: attributesManager['seconds'],
-          pause: 'false'
+          pause: 'false',
+          progress: 0
         },
       },
     })
