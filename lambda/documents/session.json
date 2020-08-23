@@ -52,10 +52,6 @@
                 "type": "Container",
                 "bind": [
                     {
-                        "name": "repeatCounter",
-                        "value": 0
-                    },
-                    {
                         "name": "minutes",
                         "value": 2
                     },
@@ -73,11 +69,6 @@
                         "commands": [
                             {
                                 "type": "SetValue",
-                                "property": "repeatCounter",
-                                "value": "${repeatCounter + 1}"
-                            },
-                            {
-                                "type": "SetValue",
                                 "property": "minutes",
                                 "value": "${Math.floor(elapsedTime / 60000) >= 2 ? 0 : 1 - Math.floor(elapsedTime / 60000)}"
                             },
@@ -89,19 +80,18 @@
                         ]
                     },
                     {
-                        "when": "${elapsedTime > 5000}",
+                        "when": "${elapsedTime > 120000}",
                         "minimumDelay": 100,
                         "commands": [
                             {
-                                "type": "SendEvent",
-                                "arguments": [
-                                  "Time is up"
-                                ]
+                                "type": "SetValue",
+                                "property": "minutes",
+                                "value": "0"
                             },
                             {
                                 "type": "SetValue",
-                                "property": "repeatCounter",
-                                "value": "123"
+                                "property": "seconds",
+                                "value": "0"
                             }
                         ]
                     }
