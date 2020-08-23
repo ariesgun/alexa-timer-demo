@@ -94,7 +94,7 @@ function updateSessionAttributes(newSession, sessionAttributes) {
   sessionAttributes['startTime'] = moment();
 }
 
-function renderSessionAPLDocument(attributesManager, responseBuilder) {
+function renderNewSessionAPLDocument(attributesManager, responseBuilder) {
   console.log(
     'Current session now before is ' + attributesManager['curSession']
   );
@@ -141,6 +141,48 @@ function renderSessionAPLDocument(attributesManager, responseBuilder) {
         },
       ],
     });
+}
+
+function renderPausedSessionAPLDocument(attributesManager, responseBuilder) {
+    
+    responseBuilder
+    .addDirective({
+      type: 'Alexa.Presentation.APL.RenderDocument',
+      token: 'sessionToken',
+      document: main,
+      datasources: {
+        sessionData: {
+          title: attributesManager['title'],
+          duration: attributesManager['duration'],
+          minutes: attributesManager['minutes'],
+          seconds: attributesManager['seconds'],
+          pause: 'true'
+        },
+      },
+    })
+    .addDirective({
+      type: 'Alexa.Presentation.APL.ExecuteCommands',
+      token: 'sessionToken',
+      commands: [
+        {
+          type: 'Sequential',
+          commands: [
+            {
+              type: 'Idle',
+              delay: attributesManager['durationMS'],
+            },
+            {
+              type: 'Idle',
+              delay: '1000',
+            },
+            {
+              type: 'SendEvent',
+            },
+          ],
+        },
+      ],
+    });
+    
 }
 
 const LaunchRequestHandler = {
@@ -215,7 +257,7 @@ const StartSessionIntentHandler = {
 
         handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
 
-        renderSessionAPLDocument(
+        renderNewSessionAPLDocument(
           sessionAttributes,
           handlerInput.responseBuilder
         );
@@ -341,7 +383,7 @@ const AmazonYesHandler = {
 
     const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
 
-    renderSessionAPLDocument(sessionAttributes, handlerInput.responseBuilder);
+    renderNewSessionAPLDocument(sessionAttributes, handlerInput.responseBuilder);
 
     const speakOutput = `${sessionAttributes['curSession']} session starts from now.`;
     return handlerInput.responseBuilder.speak(speakOutput).getResponse();
