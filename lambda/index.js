@@ -89,6 +89,8 @@ function updateSessionAttributes(newSession, sessionAttributes) {
   sessionAttributes['title'] = DURATION_DICT[newSession].title;
   sessionAttributes['duration'] = DURATION_DICT[newSession].duration;
   sessionAttributes['durationMS'] = DURATION_DICT[newSession].duration * 60000;
+  sessionAttributes['minutes'] = DURATION_DICT[newSession].duration;
+  sessionAttributes['seconds'] = 0;
   sessionAttributes['startTime'] = moment();
 }
 
@@ -111,8 +113,8 @@ function renderSessionAPLDocument(attributesManager, responseBuilder) {
         sessionData: {
           title: attributesManager['title'],
           duration: attributesManager['duration'],
-          minutes: attributesManager['duration'],
-          seconds: 0,
+          minutes: attributesManager['minutes'],
+          seconds: attributesManager['seconds'],
           pause: 'false'
         },
       },
