@@ -82,7 +82,7 @@ function renderSessionAPLDocument(attributesManager, responseBuilder) {
                     },
                     {
                         type: "Idle",
-                        delay: "2000"
+                        delay: "1000"
                     },
                     {
                         type: "SendEvent"
