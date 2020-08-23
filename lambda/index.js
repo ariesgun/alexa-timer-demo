@@ -51,8 +51,10 @@ const SessionFinishedIntentHandler = {
   },
   handle(handlerInput) {
     // Take argument sent from the button to speak back to the user
+    const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+    
     console.log('Soure id ' + handlerInput.requestEnvelope.request.source.id)
-    const newSession = 'break';
+    const newSession = sessionAttributes['curSession'] === 'focus' ? 'break' : 'focus';
     
     const speechText = "The previous session has completed. Do you want to start ${newSession} session now?";
     return handlerInput.responseBuilder
@@ -86,7 +88,7 @@ const StartSessionIntentHandler = {
             if (timerStatus === 'ON') {
                 const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
                 sessionAttributes['startedText'] = "Wow, it is started";
-                sessionAttributes['curSession'] = 'Focus';
+                sessionAttributes['curSession'] = 'focus';
                 //sessionAttributes['lastTimerId'] = timerId;
 
                 handlerInput.attributesManager.setSessionAttributes(sessionAttributes);
