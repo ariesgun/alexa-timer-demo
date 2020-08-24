@@ -93,6 +93,7 @@ function updateSessionAttributes(newSession, sessionAttributes) {
   sessionAttributes['seconds'] = 0;
   sessionAttributes['progress'] = 0;
   sessionAttributes['startTime'] = moment();
+  sessionAttributes['prevElapsedTime'] = 0;
 }
 
 function renderNewSessionAPLDocument(attributesManager, responseBuilder) {
