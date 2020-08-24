@@ -159,7 +159,7 @@ function renderExistingSessionAPLDocument(
   console.log(attributesManager);
 
   const curDuration = moment().diff(attributesManager['startTime'], 'seconds');
-  const diff =  curDuration - ((attributesManager['prevElapsedTime'] + attributesManager['pauseTime']) / 1000 );
+  const diff =  curDuration - ((attributesManager['prevElapsedTime'] + attributesManager['pauseTime']) / 1000);
   if (pause) {
       attributesManager['minutes'] =
         attributesManager['duration'] - Math.floor(diff / 60) - 1;
