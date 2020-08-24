@@ -158,7 +158,6 @@ function renderExistingSessionAPLDocument(
   console.log(attributesManager);
 
   if (pause) {
-     
       const diff = moment().diff(attributesManager['startTime'], 'seconds');
     
       attributesManager['minutes'] =
