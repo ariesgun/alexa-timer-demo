@@ -194,6 +194,8 @@ function renderExistingSessionAPLDocument(
       },
     });
     
+    
+    if (pause) {
   responseBuilder
     .addDirective({
       type: 'Alexa.Presentation.APL.ExecuteCommands',
@@ -217,6 +219,25 @@ function renderExistingSessionAPLDocument(
         },
       ],
     });
+    } else {
+       responseBuilder
+    .addDirective({
+      type: 'Alexa.Presentation.APL.ExecuteCommands',
+      token: 'sessionToken',
+      commands: [
+        {
+          type: 'Sequential',
+          commands: [
+
+            {
+              type: 'Idle',
+              delay: '30000',
+            },
+          ],
+        },
+      ],
+    }); 
+    }
 }
 
 const LaunchRequestHandler = {
