@@ -22,28 +22,22 @@
         {
           "name": "StartSessionIntent",
           "slots": [],
-          "samples": [
-            "start",
-            "start focus session",
-            "start session"
-          ]
+          "samples": ["start", "start focus session", "start session"]
         },
         {
           "name": "StopSessionIntent",
           "slots": [],
-          "samples": [
-            "stop focus",
-            "stop focus session"
-          ]
+          "samples": ["stop focus", "stop focus session"]
         },
         {
           "name": "PauseSessionIntent",
           "slots": [],
-          "samples": [
-            "pause focus session",
-            "pause session",
-            "pause"
-          ]
+          "samples": ["pause focus session", "pause session", "pause"]
+        },
+        {
+          "name": "ResumeSessionIntent",
+          "slots": [],
+          "samples": ["resume session", "resume"]
         }
       ],
       "types": []

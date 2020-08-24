@@ -57,7 +57,7 @@ function getNextSession(currentSession, counter = 0) {
   } else if (currentSession === 'break') {
     nextSession = counter >= 3 ? 'long-break' : 'focus';
   } else {
-      nextSession = 'focus';
+    nextSession = 'focus';
   }
 
   return nextSession;
@@ -99,7 +99,10 @@ function renderNewSessionAPLDocument(attributesManager, responseBuilder) {
   console.log(
     'Current session now before is ' + attributesManager['curSession']
   );
-  const nextSession = getNextSession(attributesManager['curSession']);
+  const nextSession = getNextSession(
+    attributesManager['curSession'],
+    sessionAttributes['counter']
+  );
   updateSessionAttributes(nextSession, attributesManager);
   console.log(
     'Current session now after is ' + attributesManager['curSession']
@@ -117,7 +120,7 @@ function renderNewSessionAPLDocument(attributesManager, responseBuilder) {
           minutes: attributesManager['minutes'],
           seconds: attributesManager['seconds'],
           pause: 'false',
-          progress: 0
+          progress: 0,
         },
       },
     })
@@ -145,20 +148,25 @@ function renderNewSessionAPLDocument(attributesManager, responseBuilder) {
     });
 }
 
-function renderPausedSessionAPLDocument(attributesManager, responseBuilder) {
-    
-    console.log(attributesManager);
-    
-    const diff = moment().diff(attributesManager['startTime'], 'seconds');
-    
-    attributesManager['minutes'] = attributesManager['duration'] - Math.floor(diff / 60) - 1;
-    attributesManager['seconds'] = 60 - (diff % 60) - 1;
-    attributesManager['durationMS'] -= (diff * 1000);
-    attributesManager['progress'] = (1508 / attributesManager['duration'] / 60) * diff;
-    
-    console.log(attributesManager);
-    
-    responseBuilder
+function renderExistingSessionAPLDocument(
+  attributesManager,
+  responseBuilder,
+  pause
+) {
+  console.log(attributesManager);
+
+  const diff = moment().diff(attributesManager['startTime'], 'seconds');
+
+  attributesManager['minutes'] =
+    attributesManager['duration'] - Math.floor(diff / 60) - 1;
+  attributesManager['seconds'] = 60 - (diff % 60) - 1;
+  attributesManager['durationMS'] -= diff * 1000;
+  attributesManager['progress'] =
+    (1508 / attributesManager['duration'] / 60) * diff;
+
+  console.log(attributesManager);
+
+  responseBuilder
     .addDirective({
       type: 'Alexa.Presentation.APL.RenderDocument',
       token: 'sessionToken',
@@ -169,8 +177,8 @@ function renderPausedSessionAPLDocument(attributesManager, responseBuilder) {
           duration: attributesManager['duration'],
           minutes: attributesManager['minutes'],
           seconds: attributesManager['seconds'],
-          pause: 'true',
-          progress: attributesManager['progress']
+          pause: `${pause}`,
+          progress: attributesManager['progress'],
         },
       },
     })
@@ -196,7 +204,6 @@ function renderPausedSessionAPLDocument(attributesManager, responseBuilder) {
         },
       ],
     });
-    
 }
 
 const LaunchRequestHandler = {
@@ -346,15 +353,40 @@ const PauseSessionIntentHandler = {
   },
   handle(handlerInput) {
     const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
-    
-    renderPausedSessionAPLDocument(sessionAttributes, handlerInput.responseBuilder);
-    
+
+    renderExistingSessionAPLDocument(
+      sessionAttributes,
+      handlerInput.responseBuilder,
+      true
+    );
+
     const speakOutput =
       'The session has been paused. To resume the session, you can say resume session.';
 
-    return handlerInput.responseBuilder
-      .speak(speakOutput)
-      .getResponse();
+    return handlerInput.responseBuilder.speak(speakOutput).getResponse();
+  },
+};
+const ResumeSessionIntentHandler = {
+  canHandle(handlerInput) {
+    return (
+      Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest' &&
+      Alexa.getIntentName(handlerInput.requestEnvelope) ===
+        'ResumeSessionIntent'
+    );
+  },
+  handle(handlerInput) {
+    const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
+
+    renderExistingSessionAPLDocument(
+      sessionAttributes,
+      handlerInput.responseBuilder,
+      false
+    );
+
+    const speakOutput =
+      'The session has been paused. To resume the session, you can say resume session.';
+
+    return handlerInput.responseBuilder.speak(speakOutput).getResponse();
   },
 };
 const AmazonYesHandler = {
@@ -370,7 +402,10 @@ const AmazonYesHandler = {
 
     const sessionAttributes = handlerInput.attributesManager.getSessionAttributes();
 
-    renderNewSessionAPLDocument(sessionAttributes, handlerInput.responseBuilder);
+    renderNewSessionAPLDocument(
+      sessionAttributes,
+      handlerInput.responseBuilder
+    );
 
     const speakOutput = `${sessionAttributes['curSession']} session starts from now.`;
     return handlerInput.responseBuilder.speak(speakOutput).getResponse();
