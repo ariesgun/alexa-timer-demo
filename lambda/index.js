@@ -173,7 +173,7 @@ function renderExistingSessionAPLDocument(
   } else {
       // Store the how long the pause is
       
-      attributesManager['pauseTime'] += (curDuration * 1000) - attributesManager['prevElapsedTime'];
+      attributesManager['pauseTime'] = (curDuration * 1000) - attributesManager['prevElapsedTime'];
   }
   
   responseBuilder
@@ -395,7 +395,7 @@ const ResumeSessionIntentHandler = {
     );
 
     const speakOutput =
-      'The session has been paused. To resume the session, you can say resume session.';
+      'The session has been resumed.';
 
     return handlerInput.responseBuilder.speak(speakOutput).getResponse();
   },
