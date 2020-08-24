@@ -164,7 +164,7 @@ function renderExistingSessionAPLDocument(
       attributesManager['minutes'] =
         attributesManager['duration'] - Math.floor(diff / 60) - 1;
       attributesManager['seconds'] = 60 - ((diff + (attributesManager['prevElapsedTime'] / 1000)) % 60) - 1;
-      attributesManager['durationMS'] -= diff * 1000;
+      attributesManager['durationMS'] -= (diff + (attributesManager['prevElapsedTime'] / 1000)) * 1000;
       attributesManager['progress'] =
         (1508 / attributesManager['duration'] / 60) * diff;
       attributesManager['prevElapsedTime'] += diff * 1000;
