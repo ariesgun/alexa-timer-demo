@@ -173,7 +173,7 @@ function renderExistingSessionAPLDocument(
   } else {
       // Store the how long the pause is
       
-      attributesManager['pauseTime'] += (curDuration - attributesManager['prevElapsedTime']) * 1000;
+      attributesManager['pauseTime'] += (curDuration * 1000) - attributesManager['prevElapsedTime'];
   }
   
   responseBuilder
