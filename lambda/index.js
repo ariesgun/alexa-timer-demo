@@ -157,18 +157,21 @@ function renderExistingSessionAPLDocument(
 ) {
   console.log(attributesManager);
 
-  const diff = moment().diff(attributesManager['startTime'], 'seconds');
-
-  attributesManager['minutes'] =
-    attributesManager['duration'] - Math.floor(diff / 60) - 1;
-  attributesManager['seconds'] = 60 - (diff % 60) - 1;
-  attributesManager['durationMS'] -= diff * 1000;
-  attributesManager['progress'] =
-    (1508 / attributesManager['duration'] / 60) * diff;
-  attributesManager['prevElapsedTime'] = diff * 1000;
-
-  console.log(attributesManager);
-
+  if (pause) {
+     
+      const diff = moment().diff(attributesManager['startTime'], 'seconds');
+    
+      attributesManager['minutes'] =
+        attributesManager['duration'] - Math.floor(diff / 60) - 1;
+      attributesManager['seconds'] = 60 - (diff % 60) - 1;
+      attributesManager['durationMS'] -= diff * 1000;
+      attributesManager['progress'] =
+        (1508 / attributesManager['duration'] / 60) * diff;
+      attributesManager['prevElapsedTime'] = diff * 1000;
+    
+      console.log(attributesManager);
+  }
+  
   responseBuilder
     .addDirective({
       type: 'Alexa.Presentation.APL.RenderDocument',
