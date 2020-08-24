@@ -162,7 +162,7 @@ function renderExistingSessionAPLDocument(
   const diff =  curDuration - ((attributesManager['prevElapsedTime'] + attributesManager['pauseTime']) / 1000);
   if (pause) {
       attributesManager['minutes'] =
-        attributesManager['duration'] - Math.floor(diff / 60) - 1;
+        attributesManager['duration'] - Math.floor((diff + (attributesManager['prevElapsedTime'] / 1000)) / 60) - 1;
       attributesManager['seconds'] = 60 - ((diff + (attributesManager['prevElapsedTime'] / 1000)) % 60) - 1;
       attributesManager['durationMS'] -= (diff + (attributesManager['prevElapsedTime'] / 1000)) * 1000;
       attributesManager['progress'] =
