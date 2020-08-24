@@ -194,7 +194,7 @@ function renderExistingSessionAPLDocument(
       },
     });
     
-responseBuilder
+  responseBuilder
     .addDirective({
       type: 'Alexa.Presentation.APL.ExecuteCommands',
       token: 'sessionToken',
