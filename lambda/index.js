@@ -159,45 +159,51 @@ function renderExistingSessionAPLDocument(
   console.log(attributesManager);
 
   const curDuration = moment().diff(attributesManager['startTime'], 'seconds');
-  const diff =  curDuration - ((attributesManager['prevElapsedTime'] + attributesManager['pauseTime']) / 1000);
+  const diff =
+    curDuration -
+    (attributesManager['prevElapsedTime'] + attributesManager['pauseTime']) /
+      1000;
   if (pause) {
-      attributesManager['minutes'] =
-        attributesManager['duration'] - Math.floor((diff + (attributesManager['prevElapsedTime'] / 1000)) / 60) - 1;
-      attributesManager['seconds'] = 60 - ((diff + (attributesManager['prevElapsedTime'] / 1000)) % 60) - 1;
-      attributesManager['durationMS'] -= (diff + (attributesManager['prevElapsedTime'] / 1000)) * 1000;
-      attributesManager['progress'] =
-        (1508 / attributesManager['duration'] / 60) * (diff + (attributesManager['prevElapsedTime'] / 1000));
-      attributesManager['prevElapsedTime'] += diff * 1000;
-    
-      console.log(attributesManager);
+    attributesManager['minutes'] =
+      attributesManager['duration'] -
+      Math.floor((diff + attributesManager['prevElapsedTime'] / 1000) / 60) -
+      1;
+    attributesManager['seconds'] =
+      60 - ((diff + attributesManager['prevElapsedTime'] / 1000) % 60) - 1;
+    attributesManager['durationMS'] -=
+      (diff + attributesManager['prevElapsedTime'] / 1000) * 1000;
+    attributesManager['progress'] =
+      (1508 / attributesManager['duration'] / 60) *
+      (diff + attributesManager['prevElapsedTime'] / 1000);
+    attributesManager['prevElapsedTime'] += diff * 1000;
+
+    console.log(attributesManager);
   } else {
-      // Store the how long the pause is
-      
-      attributesManager['pauseTime'] = (curDuration * 1000) - attributesManager['prevElapsedTime'];
+    // Store the how long the pause is
+
+    attributesManager['pauseTime'] =
+      curDuration * 1000 - attributesManager['prevElapsedTime'];
   }
-  
-  responseBuilder
-    .addDirective({
-      type: 'Alexa.Presentation.APL.RenderDocument',
-      token: 'sessionToken',
-      document: main,
-      datasources: {
-        sessionData: {
-          title: attributesManager['title'],
-          duration: attributesManager['duration'],
-          minutes: attributesManager['minutes'],
-          seconds: attributesManager['seconds'],
-          prevElapsedTime: attributesManager['prevElapsedTime'],
-          pause: `${pause}`,
-          progress: attributesManager['progress'],
-        },
+
+  responseBuilder.addDirective({
+    type: 'Alexa.Presentation.APL.RenderDocument',
+    token: 'sessionToken',
+    document: main,
+    datasources: {
+      sessionData: {
+        title: attributesManager['title'],
+        duration: attributesManager['duration'],
+        minutes: attributesManager['minutes'],
+        seconds: attributesManager['seconds'],
+        prevElapsedTime: attributesManager['prevElapsedTime'],
+        pause: `${pause}`,
+        progress: attributesManager['progress'],
       },
-    });
-    
-    
-    if (pause) {
-  responseBuilder
-    .addDirective({
+    },
+  });
+
+  if (pause) {
+    responseBuilder.addDirective({
       type: 'Alexa.Presentation.APL.ExecuteCommands',
       token: 'sessionToken',
       commands: [
@@ -219,9 +225,8 @@ function renderExistingSessionAPLDocument(
         },
       ],
     });
-    } else {
-       responseBuilder
-    .addDirective({
+  } else {
+    responseBuilder.addDirective({
       type: 'Alexa.Presentation.APL.ExecuteCommands',
       token: 'sessionToken',
       commands: [
@@ -235,8 +240,8 @@ function renderExistingSessionAPLDocument(
           ],
         },
       ],
-    }); 
-    }
+    });
+  }
 }
 
 const LaunchRequestHandler = {
@@ -416,8 +421,7 @@ const ResumeSessionIntentHandler = {
       false
     );
 
-    const speakOutput =
-      'The session has been resumed.';
+    const speakOutput = 'The session has been resumed.';
 
     return handlerInput.responseBuilder.speak(speakOutput).getResponse();
   },
