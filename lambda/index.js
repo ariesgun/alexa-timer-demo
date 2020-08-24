@@ -158,7 +158,7 @@ function renderExistingSessionAPLDocument(
   console.log(attributesManager);
 
   if (pause) {
-      const diff = moment().diff(attributesManager['startTime'], 'seconds') - attributesManager['prevElapsedTime'];
+      const diff = moment().diff(attributesManager['startTime'], 'seconds') - attributesManager['prevElapsedTime'] - attributesManager['pauseTime'];
     
       attributesManager['minutes'] =
         attributesManager['duration'] - Math.floor(diff / 60) - 1;
@@ -169,6 +169,9 @@ function renderExistingSessionAPLDocument(
       attributesManager['prevElapsedTime'] += diff * 1000;
     
       console.log(attributesManager);
+  } else {
+      // Store the how long the pause is
+      attributesManager['pauseTime'] += diff * 1000;
   }
   
   responseBuilder
