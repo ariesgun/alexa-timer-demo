@@ -101,7 +101,7 @@ function renderNewSessionAPLDocument(attributesManager, responseBuilder) {
   );
   const nextSession = getNextSession(
     attributesManager['curSession'],
-    sessionAttributes['counter']
+    attributesManager['counter']
   );
   updateSessionAttributes(nextSession, attributesManager);
   console.log(
