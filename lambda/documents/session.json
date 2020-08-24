@@ -53,6 +53,10 @@
           {
             "name": "seconds",
             "value": "${sessionData.seconds}"
+          },
+          {
+            "name": "prevElapsedTime",
+            "value": "${sessionData.prevElapsedTime}"
           }
         ],
         "height": "100vh",
