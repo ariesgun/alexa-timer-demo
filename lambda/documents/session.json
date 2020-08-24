@@ -69,12 +69,12 @@
               {
                 "type": "SetValue",
                 "property": "minutes",
-                "value": "${Math.floor(elapsedTime / 60000) >= sessionData.duration ? 0 : sessionData.duration - 1 - Math.floor(elapsedTime / 60000)}"
+                "value": "${Math.floor((prevElapsedTime + elapsedTime) / 60000) >= sessionData.duration ? 0 : sessionData.duration - 1 - Math.floor((elapsedTime + prevElapsedTime_ / 60000)}"
               },
               {
                 "type": "SetValue",
                 "property": "seconds",
-                "value": "${((Math.floor(elapsedTime / 1000) % 60) == 0 ? 59 : 59 - Math.floor(elapsedTime / 1000) % 60)}"
+                "value": "${((Math.floor((elapsedTime + prevElapsedTime) / 1000) % 60) == 0 ? 59 : 59 - Math.floor((elapsedTime + prevElapsedTime) / 1000) % 60)}"
               }
             ]
           }
