@@ -67,11 +67,11 @@ function updateSessionAttributes(newSession, sessionAttributes) {
   const DURATION_DICT = {
     focus: {
       title: 'focus',
-      duration: 2,
+      duration: 25,
     },
     break: {
       title: 'break',
-      duration: 2,
+      duration: 5,
     },
     'long-break': {
       title: 'break',
@@ -192,7 +192,9 @@ function renderExistingSessionAPLDocument(
           progress: attributesManager['progress'],
         },
       },
-    })
+    });
+    
+    responseBuilder.
     .addDirective({
       type: 'Alexa.Presentation.APL.ExecuteCommands',
       token: 'sessionToken',
