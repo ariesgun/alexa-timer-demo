@@ -228,7 +228,6 @@ function renderExistingSessionAPLDocument(
         {
           type: 'Sequential',
           commands: [
-
             {
               type: 'Idle',
               delay: '30000',
